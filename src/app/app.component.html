@@ -1,21 +1,62 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+<nav class="navbar navbar-default navbar-static-top">
+    <div class="navbar-brand">
+        SNOMED CT BROWSER
+    </div>
+    <form class="form-inline">
+        <div class="form-group">
+            <div class="input-group">
+                <input class="form-control" placeholder="Desde" name="dp" [(ngModel)]="Desde" ngbDatepicker #dd="ngbDatepicker">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary calendar" (click)="dd.toggle()" type="button"></button>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                <input class="form-control" placeholder="Hasta" name="dph" [(ngModel)]="hasta" ngbDatepicker #dh="ngbDatepicker">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" (click)="dh.toggle()" type="button">
+                        <span class="glyphicon glyphicon-remove-circle"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form> 
+</nav>
+<div class="container-fluid">
+    <div style="height: 100%;">
+        <as-split direction="horizontal">
+            <as-split-area size="640">
+                <ngb-tabset>
+                    <ngb-tab title="Busqueda">
+                        <ng-template ngbTabContent>
+                            <app-nav-busqueda></app-nav-busqueda>
+                        </ng-template>
+                    </ngb-tab>
+                    <ngb-tab title="Jerarquía">
+                        <ng-template ngbTabContent>
+                        </ng-template>
+                    </ngb-tab>
+                    <ngb-tab title="Favoritos">
+                        <ng-template ngbTabContent>
+                        </ng-template>
+                    </ngb-tab>
+                    <ngb-tab title="Conjunto de Referencia">
+                        <ng-template ngbTabContent>
+                        </ng-template>
+                    </ngb-tab>
+                </ngb-tabset>
+            </as-split-area>
+            <as-split-area size="60">
+                <ngb-tabset>
+                    <ngb-tab title="Detalle del concepto">
+                        <ng-template ngbTabContent>
+                            <app-concept-detail></app-concept-detail>
+                        </ng-template>
+                    </ngb-tab>
+                </ngb-tabset>
+            </as-split-area>
+        </as-split>
+    </div>
 </div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
-
 <router-outlet></router-outlet>

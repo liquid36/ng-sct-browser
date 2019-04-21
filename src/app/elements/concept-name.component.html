@@ -1,0 +1,18 @@
+<div class="fsn-card">
+    <h5>
+        <span class="badge alert-warning" style="padding: 3px 7px;border-radius: 10px;">
+            {{ concept.definitionStatus.conceptId === '900000000000073002' ? '≡' : '&nbsp;&nbsp;' }}
+        </span>
+        &nbsp;&nbsp;
+        {{ concept.fullySpecifiedName }}
+        <!-- ( {{ concept.semtag }} ) -->
+        
+
+    </h5>
+    <h6>
+        SCTID: {{ concept.conceptId }} 
+        <br/>
+        <br/>
+        {{ concept.conceptId }} | {{ concept.fullySpecifiedName }}
+    </h6>
+</div>
