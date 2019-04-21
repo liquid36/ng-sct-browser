@@ -1,0 +1,42 @@
+<h5> Rango Etario </h5>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+          <th scope="col">Sexo</th>
+          <th scope="col">0</th>
+          <th scope="col">10</th>
+          <th scope="col">20</th>
+          <th scope="col">30</th>
+          <th scope="col">40</th>
+          <th scope="col">50</th>
+          <th scope="col">60</th>
+          <th scope="col">70</th>
+          <th scope="col">80</th>
+          <th scope="col">90</th>
+          <th scope="col">Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Masculino</td>
+            <td *ngFor="let j of [0, 1, 2, 3 ,4 ,5 ,6 ,7 ,8, 9]">
+                {{ tableDemografia[0][j] }}   
+            </td>
+            <td> {{ tableDemografia[0][10] }} </td>
+        </tr>
+        <tr>
+            <td>Femenino</td>
+            <td *ngFor="let j of [0, 1, 2, 3 ,4 ,5 ,6 ,7 ,8, 9]">
+                {{ tableDemografia[1][j] }}   
+            </td>
+            <td> {{ tableDemografia[1][10] }} </td>
+        </tr>
+        <tr>
+            <td>Total</td>
+            <td *ngFor="let j of [0, 1, 2, 3 ,4 ,5 ,6 ,7 ,8, 9]">
+                {{ tableDemografia[2][j] }}   
+            </td>
+            <td> {{ tableDemografia[2][10] }} </td>
+        </tr>
+    </tbody>
+</table>

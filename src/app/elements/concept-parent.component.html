@@ -20,6 +20,10 @@
             <span style="cursor: pointer;" (dblclick)="onSelect(relacion)">
                 {{ relacion.fullySpecifiedName }}
             </span>
+
+            <span class="badge badge-primary badge-pill" *ngIf="relacion._stats">
+                {{ relacion._stats.exact }} | {{ relacion._stats.children }}
+            </span>
         </li>
     </ul>
 </div>

@@ -30,4 +30,11 @@ export class SnomedAPI {
         return this.http.get(`${this.path}/${this.database}/${this.version}/concepts/${sctid}/children`, { params: { form: 'stated' }});
     }
 
+    history(sctids) {
+        return this.http.post(`/andes/rup`, { concepts: sctids });
+    }
+
+    demografia(sctid) {
+        return this.http.post(`/andes/rup/demografia`, { conceptId: sctid });
+    }
 }

@@ -27,6 +27,7 @@ export class ConceptParentComponent {
                 .filter(e => e.characteristicType.conceptId === ConceptParentComponent.STATED)
                 .filter(e => e.type.conceptId === ConceptParentComponent.ISA)
                 .map(e => { e.destination._level = 0; return e.destination; });
+            this.getStats(this.relatioships);
         } else {
             this.relatioships = [];
         }
@@ -34,6 +35,16 @@ export class ConceptParentComponent {
 
     onSelect(concept) {
         this.conceptDetailService.select(concept);
+    }
+
+    getStats(conceptos) {
+        const scts = conceptos.map(e => e.conceptId);
+        this.snomed.history(scts).subscribe((stats) => {
+            conceptos.forEach(c => {
+                c._stats = stats[c.conceptId];
+            });
+            this.relatioships = [...this.relatioships];
+        });
     }
 
     getParents(relationship, index) {
@@ -46,6 +57,7 @@ export class ConceptParentComponent {
                     ...parents,
                     ...this.relatioships.slice(index)
                  ];
+                this.getStats(parents);
             });
         } else {
             relationship._expanded = false;

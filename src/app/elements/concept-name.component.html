@@ -14,5 +14,11 @@
         <br/>
         <br/>
         {{ concept.conceptId }} | {{ concept.fullySpecifiedName }}
+        <br/>
+        <ng-container *ngIf="stats"> 
+            Total: {{ stats.total }} <br/>
+            Exactos: {{ stats.exact }} <br/>
+            Descendientes: {{ stats.children }}
+        </ng-container>
     </h6>
 </div>

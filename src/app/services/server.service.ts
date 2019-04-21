@@ -56,7 +56,7 @@ export class Server {
                 'Content-Type': 'application/json',
                 // Authorization: window.sessionStorage.getItem('jwt') ? 'JWT ' + window.sessionStorage.getItem('jwt') : null
             }),
-            params: options.params
+            params: options ? options.params : null
         };
         // if (options && options.params) {
         //     result.params = new HttpParams();
@@ -99,9 +99,9 @@ export class Server {
     }
 
     post(url: string, body: any, options: Options = null): Observable<any> {
-        return this.http.post(this.getAbsoluteURL(url), this.stringify(body), this.prepareOptions(options))
+        return this.http.post(this.getAbsoluteURL(url), this.stringify(body), this.prepareOptions(options));
             // .finally(() => this.updateLoader(false, options))
-            .pipe(map((res: Response) => this.parse(res.body)));
+            // .pipe(map((res: Response) => this.parse(res.body)));
             // .catch((err: any, caught: Observable<any>) => this.handleError(err, options));
     }
 
