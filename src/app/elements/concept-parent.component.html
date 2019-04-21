@@ -2,6 +2,7 @@
     <!-- <div class="card-header"> -->
         <h5 class="card-title">
             Ancestros
+            <span *ngIf="relatioships.length === 0"> (0) </span>
         </h5>
     <!-- </div> -->
     <ul>
@@ -16,7 +17,9 @@
                 {{ relacion.definitionStatus.conceptId === '900000000000073002' ? '≡' : '&nbsp;&nbsp;' }}
             </span>
 
-            {{ relacion.fullySpecifiedName }}
+            <span style="cursor: pointer;" (dblclick)="onSelect(relacion)">
+                {{ relacion.fullySpecifiedName }}
+            </span>
         </li>
     </ul>
 </div>

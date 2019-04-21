@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { SnomedAPI } from '../services/snomed.service';
+import { ConceptDetailService } from '../components/concept-detail/concept-detail.service';
 
 @Component({
   selector: 'app-concept-parent',
@@ -11,17 +12,28 @@ export class ConceptParentComponent {
     public static INFERRED = '900000000000011006';
     public static STATED = '900000000000010007';
 
-    constructor(private snomed: SnomedAPI) {}
+    constructor(
+        private snomed: SnomedAPI,
+        private conceptDetailService: ConceptDetailService
+    ) {}
 
     private conceptTemp;
     public relatioships: any[];
     @Input() set concept(value) {
         this.conceptTemp = value;
-        this.relatioships = this.conceptTemp.relationships
-            .filter(e => e.active)
-            .filter(e => e.characteristicType.conceptId === ConceptParentComponent.STATED)
-            .filter(e => e.type.conceptId === ConceptParentComponent.ISA)
-            .map(e => { e.destination._level = 0; return e.destination; });
+        if (this.conceptTemp.relationships) {
+            this.relatioships = this.conceptTemp.relationships
+                .filter(e => e.active)
+                .filter(e => e.characteristicType.conceptId === ConceptParentComponent.STATED)
+                .filter(e => e.type.conceptId === ConceptParentComponent.ISA)
+                .map(e => { e.destination._level = 0; return e.destination; });
+        } else {
+            this.relatioships = [];
+        }
+    }
+
+    onSelect(concept) {
+        this.conceptDetailService.select(concept);
     }
 
     getParents(relationship, index) {

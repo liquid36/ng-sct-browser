@@ -15,7 +15,9 @@
                 {{ relacion.definitionStatus.conceptId === '900000000000073002' ? '≡' : '&nbsp;&nbsp;' }}
             </span>
 
-            {{ relacion.preferredTerm }}
+            <span style="cursor: pointer;" (dblclick)="onSelect(relacion)">
+                {{ relacion.preferredTerm }}
+            </span>
         </li>
     </ul>
 </div>

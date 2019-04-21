@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { SnomedAPI } from '../services/snomed.service';
+import { ConceptDetailService } from '../components/concept-detail/concept-detail.service';
 
 @Component({
   selector: 'app-concept-children',
@@ -11,7 +12,10 @@ export class ConceptChildrenComponent {
     public static INFERRED = '900000000000011006';
     public static STATED = '900000000000010007';
 
-    constructor(private snomed: SnomedAPI) {}
+    constructor(
+        private snomed: SnomedAPI,
+        private conceptDetailService: ConceptDetailService
+    ) {}
 
     private conceptTemp;
     public relatioships: any[] = [];
@@ -21,6 +25,10 @@ export class ConceptChildrenComponent {
             children.forEach(e => e._level = 0);
             this.relatioships = children;
         });
+    }
+
+    onSelect(concept) {
+        this.conceptDetailService.select(concept);
     }
 
     getChildren(relationship, index) {
