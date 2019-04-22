@@ -21,6 +21,7 @@ import { SummaryNavComponent } from './components/concept-detail/summary-nav/sum
 import { ConceptNameComponent } from './elements/concept-name.component';
 import { ConceptParentComponent } from './elements/concept-parent.component';
 import { ConceptChildrenComponent } from './elements/concept-children.component';
+import { TaxonomyNavComponent } from './components/taxonomy-nav/taxonomy-nav.component';
 
 
 @NgModule({
@@ -29,6 +30,8 @@ import { ConceptChildrenComponent } from './elements/concept-children.component'
     NavBusquedaComponent,
     ConceptDetailComponent,
     SummaryNavComponent,
+    DemografiaNavComponent,
+    TaxonomyNavComponent,
     ConceptNameComponent,
     ConceptParentComponent,
     ConceptChildrenComponent
