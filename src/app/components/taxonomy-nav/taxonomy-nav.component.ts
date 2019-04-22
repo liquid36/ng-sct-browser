@@ -43,17 +43,18 @@ export class TaxonomyNavComponent implements OnInit {
     public relatioships: any[] = [];
 
     ngOnInit() {
-        // this.snomed.children(value.conceptId).subscribe(children => {
-        //     children.forEach(e => e._level = 0);
-        //     this.relatioships = children;
-        // });
         this.relatioships = [this.ROOTConcept];
     }
 
-    // @Input() set concept(value) {
-    //     this.conceptTemp = value;
-    // }
-
+    getStats(conceptos) {
+        const scts = conceptos.map(e => e.conceptId);
+        this.snomed.history(scts).subscribe((stats) => {
+            conceptos.forEach(c => {
+                c._stats = stats[c.conceptId];
+            });
+            this.relatioships = [...this.relatioships];
+        });
+    }
 
     onSelect(concept) {
         this.conceptDetailService.select(concept);
@@ -68,7 +69,8 @@ export class TaxonomyNavComponent implements OnInit {
                     ...this.relatioships.slice(0, index + 1),
                     ...children,
                     ...this.relatioships.slice(index + 1)
-                 ];
+                ];
+                this.getStats(children);
             });
         } else {
             relationship._expanded = false;
