@@ -21,7 +21,7 @@
                 {{ relacion.fullySpecifiedName }}
             </span>
 
-            <span class="badge badge-primary badge-pill" *ngIf="relacion._stats">
+            <span class="badge badge-primary badge-pill" *ngIf="relacion._stats && relacion._stats.total">
                 {{ relacion._stats.exact }} | {{ relacion._stats.children }}
             </span>
         </li>
