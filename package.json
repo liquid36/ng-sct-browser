@@ -1,6 +1,6 @@
 {
-  "name": "andes-browser",
-  "version": "0.0.0",
+  "name": "ng-sct-browser",
+  "version": "0.0.1",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
