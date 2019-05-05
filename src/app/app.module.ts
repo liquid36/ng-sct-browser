@@ -23,6 +23,9 @@ import { ConceptParentComponent } from './elements/concept-parent.component';
 import { ConceptChildrenComponent } from './elements/concept-children.component';
 import { DemografiaNavComponent } from './components/concept-detail/demografia-nav/demografia-nav.component';
 import { TaxonomyNavComponent } from './components/taxonomy-nav/taxonomy-nav.component';
+import { DetailNavComponent } from './components/concept-detail/detail-nav/detail-nav.component';
+import { ConceptDescTableComponent } from './elements/concept-desc-table.component';
+import { ConceptRelTableComponent } from './elements/concept-rel-table.component';
 
 
 @NgModule({
@@ -32,10 +35,13 @@ import { TaxonomyNavComponent } from './components/taxonomy-nav/taxonomy-nav.com
     ConceptDetailComponent,
     SummaryNavComponent,
     DemografiaNavComponent,
+    DetailNavComponent,
     TaxonomyNavComponent,
     ConceptNameComponent,
     ConceptParentComponent,
-    ConceptChildrenComponent
+    ConceptChildrenComponent,
+    ConceptDescTableComponent,
+    ConceptRelTableComponent
   ],
   imports: [
     BrowserModule,
