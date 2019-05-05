@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SnomedAPI } from '../services/snomed.service';
 import { ConceptDetailService } from './concept-detail/concept-detail.service';
+import { Unsubscribe } from '../decorators/Unsubscribe';
 
 enum SearchMode {
     fullText,
@@ -37,6 +38,7 @@ export class NavBusquedaComponent implements OnInit {
         this.conceptDetailService.select(concept);
     }
 
+    @Unsubscribe()
     search() {
         const params: any = {
             query: this.textSearch,
@@ -51,7 +53,7 @@ export class NavBusquedaComponent implements OnInit {
         if (this.semanticFilter.length > 0) {
             params.semanticFilter = this.semanticFilter;
         }
-        this.snomed.descriptions(params).subscribe((result) => {
+        return this.snomed.descriptions(params).subscribe((result) => {
             this.matches = result.matches;
             this.filters = result.filters;
         });

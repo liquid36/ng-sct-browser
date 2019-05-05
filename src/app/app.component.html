@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default navbar-static-top">
+<nav class="navbar navbar-default navbar-static-top" style="height: 42px;">
     <div class="navbar-brand">
         SNOMED CT BROWSER
     </div>
@@ -23,8 +23,8 @@
         </div>
     </form> 
 </nav>
-<div class="container-fluid">
-    <div style="height: 100%;">
+<div class="container-fluid" style="height: calc(100% - 42px);">
+    <!-- <div > -->
         <as-split direction="horizontal">
             <as-split-area size="640">
                 <ngb-tabset>
@@ -58,6 +58,6 @@
                 </ngb-tabset>
             </as-split-area>
         </as-split>
-    </div>
+    <!-- </div> -->
 </div>
 <router-outlet></router-outlet>
