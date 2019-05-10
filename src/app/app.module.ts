@@ -26,6 +26,14 @@ import { TaxonomyNavComponent } from './components/taxonomy-nav/taxonomy-nav.com
 import { DetailNavComponent } from './components/concept-detail/detail-nav/detail-nav.component';
 import { ConceptDescTableComponent } from './elements/concept-desc-table.component';
 import { ConceptRelTableComponent } from './elements/concept-rel-table.component';
+import { GraphNavComponent } from './components/concept-detail/graph-nav/graph-nav.component';
+import { SctBoxComponent } from './elements/graph/sct-box.svg';
+import { CommonModule } from '@angular/common';
+import { AttributeGruopNodeComponent } from './elements/graph/attribute-group-node.svg';
+import { ConjunctionNodeComponent } from './elements/graph/conjunction-node.svg';
+import { EquivalentNodeComponent } from './elements/graph/equivalent-node.svg';
+import { SubsumedByNodeComponent } from './elements/graph/subsumed-by-node.svg';
+import { SubsumesNodeComponent } from './elements/graph/subsumes-node.svg';
 
 
 @NgModule({
@@ -37,13 +45,21 @@ import { ConceptRelTableComponent } from './elements/concept-rel-table.component
     DemografiaNavComponent,
     DetailNavComponent,
     TaxonomyNavComponent,
+    GraphNavComponent,
     ConceptNameComponent,
     ConceptParentComponent,
     ConceptChildrenComponent,
     ConceptDescTableComponent,
-    ConceptRelTableComponent
+    ConceptRelTableComponent,
+    SctBoxComponent,
+    AttributeGruopNodeComponent,
+    ConjunctionNodeComponent,
+    EquivalentNodeComponent,
+    SubsumedByNodeComponent,
+    SubsumesNodeComponent
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     FormsModule,
     HttpClientModule,
