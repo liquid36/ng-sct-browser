@@ -29,11 +29,8 @@ import { ConceptRelTableComponent } from './elements/concept-rel-table.component
 import { GraphNavComponent } from './components/concept-detail/graph-nav/graph-nav.component';
 import { SctBoxComponent } from './elements/graph/sct-box.svg';
 import { CommonModule } from '@angular/common';
-import { AttributeGruopNodeComponent } from './elements/graph/attribute-group-node.svg';
-import { ConjunctionNodeComponent } from './elements/graph/conjunction-node.svg';
-import { EquivalentNodeComponent } from './elements/graph/equivalent-node.svg';
-import { SubsumedByNodeComponent } from './elements/graph/subsumed-by-node.svg';
-import { SubsumesNodeComponent } from './elements/graph/subsumes-node.svg';
+import { ConnectElementComponent } from './elements/graph/connect-element.svg';
+import { CircleNodeComponent } from './elements/graph/circle-node.svg';
 
 
 @NgModule({
@@ -52,11 +49,8 @@ import { SubsumesNodeComponent } from './elements/graph/subsumes-node.svg';
     ConceptDescTableComponent,
     ConceptRelTableComponent,
     SctBoxComponent,
-    AttributeGruopNodeComponent,
-    ConjunctionNodeComponent,
-    EquivalentNodeComponent,
-    SubsumedByNodeComponent,
-    SubsumesNodeComponent
+    ConnectElementComponent,
+    CircleNodeComponent
   ],
   imports: [
     CommonModule,

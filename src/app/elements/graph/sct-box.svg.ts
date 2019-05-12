@@ -44,7 +44,12 @@ export class SctBoxComponent implements AfterViewInit, OnChanges {
         return this.testBox ? Math.round(this.testBox.nativeElement.getBBox().width * 1.2) : 0;
     }
 
-    constructor(private cd: ChangeDetectorRef) {}
+    get bbox() {
+        this.cd.detectChanges();
+        return this.el.nativeElement.getBBox();
+    }
+
+    constructor(private cd: ChangeDetectorRef, private el: ElementRef) {}
 
 
     ngOnChanges() {
