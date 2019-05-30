@@ -31,6 +31,8 @@ import { SctBoxComponent } from './elements/graph/sct-box.svg';
 import { CommonModule } from '@angular/common';
 import { ConnectElementComponent } from './elements/graph/connect-element.svg';
 import { CircleNodeComponent } from './elements/graph/circle-node.svg';
+import { TreeNavComponent } from './components/concept-detail/tree-nav/tree-nav.component';
+import { TreeElementComponent } from './elements/tree/tree-element.component';
 
 
 @NgModule({
@@ -50,7 +52,9 @@ import { CircleNodeComponent } from './elements/graph/circle-node.svg';
     ConceptRelTableComponent,
     SctBoxComponent,
     ConnectElementComponent,
-    CircleNodeComponent
+    CircleNodeComponent,
+    TreeNavComponent,
+    TreeElementComponent
   ],
   imports: [
     CommonModule,

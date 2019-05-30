@@ -5,27 +5,32 @@
                 <strong>Detalle del concepto</strong>
             </div>
         </div>
-    </div> 
+    </div>
     <ngb-tabset>
         <ngb-tab title="Summary">
-            <ng-template ngbTabContent> 
+            <ng-template ngbTabContent>
                 <app-summary-nav></app-summary-nav>
             </ng-template>
         </ngb-tab>
         <ngb-tab title="Detail">
-            <ng-template ngbTabContent> 
+            <ng-template ngbTabContent>
                 <app-detail-nav></app-detail-nav>
             </ng-template>
         </ngb-tab>
         <ngb-tab title="Estadisticas">
-            <ng-template ngbTabContent> 
+            <ng-template ngbTabContent>
                 <app-demografia-nav></app-demografia-nav>
             </ng-template>
         </ngb-tab>
         <ngb-tab title="Diagram">
-            <ng-template ngbTabContent> 
+            <ng-template ngbTabContent>
                 <app-graph-nav></app-graph-nav>
             </ng-template>
         </ngb-tab>
-    </ngb-tabset> 
+        <ngb-tab title="Graph">
+            <ng-template ngbTabContent>
+                <app-tree-nav></app-tree-nav>
+            </ng-template>
+        </ngb-tab>
+    </ngb-tabset>
 </div>

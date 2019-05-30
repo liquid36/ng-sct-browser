@@ -14,7 +14,7 @@ export class SnomedAPI {
     }
 
     descriptions(params) {
-        return this.http.get(`${this.path}/${this.database}/${this.version}/descriptions`, { params } );
+        return this.http.get(`${this.path}/${this.database}/${this.version}/descriptions`, { params });
     }
 
 
@@ -22,12 +22,20 @@ export class SnomedAPI {
         return this.http.get(`${this.path}/${this.database}/${this.version}/concepts/${sctid}`);
     }
 
+    concepts(sctids) {
+        return this.http.get(`${this.path}/${this.database}/${this.version}/concepts`, {
+            params: {
+                sctids
+            }
+        });
+    }
+
     parents(sctid) {
-        return this.http.get(`${this.path}/${this.database}/${this.version}/concepts/${sctid}/parents`, { params: { form: 'stated' }});
+        return this.http.get(`${this.path}/${this.database}/${this.version}/concepts/${sctid}/parents`, { params: { form: 'stated' } });
     }
 
     children(sctid) {
-        return this.http.get(`${this.path}/${this.database}/${this.version}/concepts/${sctid}/children`, { params: { form: 'stated' }});
+        return this.http.get(`${this.path}/${this.database}/${this.version}/concepts/${sctid}/children`, { params: { form: 'stated' } });
     }
 
     history(sctids) {
