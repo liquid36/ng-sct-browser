@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { SnomedAPI } from '../services/snomed.service';
-import { ConceptDetailService } from './concept-detail/concept-detail.service';
-import { Unsubscribe } from '../decorators/Unsubscribe';
+import { SnomedAPI } from '../../services/snomed.service';
+import { ConceptDetailService } from '../concept-detail/concept-detail.service';
+import { Unsubscribe } from '../../decorators/Unsubscribe';
+import { NavBusquedaService } from './nav-busqueda.service';
 
 enum SearchMode {
     fullText,
@@ -16,9 +17,8 @@ enum StausFilter {
 }
 
 @Component({
-  selector: 'app-nav-busqueda',
-  templateUrl: './nav-busqueda.component.html',
-//   styleUrls: ['./app.component.scss']
+    selector: 'app-nav-busqueda',
+    templateUrl: './nav-busqueda.component.html'
 })
 export class NavBusquedaComponent implements OnInit {
     public matches;
@@ -26,12 +26,22 @@ export class NavBusquedaComponent implements OnInit {
 
 
     public textSearch = '';
+    public lastSearch = '';
     private searchMode = 'partialMatching';
     private statusFilter = 'activeOnly';
     private semanticFilter = '';
 
-    constructor(private snomed: SnomedAPI, private conceptDetailService: ConceptDetailService) {}
+    constructor(
+        private snomed: SnomedAPI,
+        private conceptDetailService: ConceptDetailService,
+        private nb: NavBusquedaService
+    ) { }
+
     ngOnInit() {
+        this.nb.searchInput$.subscribe(text => {
+            this.textSearch = text;
+            this.onInputChange(text || '');
+        });
     }
 
     onSelect(concept) {
@@ -60,11 +70,14 @@ export class NavBusquedaComponent implements OnInit {
     }
 
     onInputChange(query: string) {
-        if (query.length > 2) {
-            this.textSearch = query;
-            this.search();
-        } else {
-            this.matches = null;
+        if (this.lastSearch !== query) {
+            if (query.length > 2) {
+                this.lastSearch = query;
+                this.nb.search = query;
+                this.search();
+            } else {
+                this.matches = null;
+            }
         }
     }
 

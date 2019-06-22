@@ -13,7 +13,7 @@ import { AngularSplitModule } from 'angular-split';
 import { Server } from './services/server.service';
 import { SnomedAPI } from './services/snomed.service';
 
-import { NavBusquedaComponent } from './components/nav-busqueda.component';
+import { NavBusquedaComponent } from './components/nav-busqueda/nav-busqueda.component';
 
 import { ConceptDetailService } from './components/concept-detail/concept-detail.service';
 import { ConceptDetailComponent } from './components/concept-detail/concept-detail.component';
@@ -33,6 +33,10 @@ import { ConnectElementComponent } from './elements/graph/connect-element.svg';
 import { CircleNodeComponent } from './elements/graph/circle-node.svg';
 import { TreeNavComponent } from './components/concept-detail/tree-nav/tree-nav.component';
 import { TreeElementComponent } from './elements/tree/tree-element.component';
+import { QueryFilterService } from './services/queryfilter.service';
+import { TimeFilterFormComponent } from './components/time-filter-form/time-filter-form.component';
+import { HomeComponent } from './components/home/home.component';
+import { NavBusquedaService } from './components/nav-busqueda/nav-busqueda.service';
 
 
 @NgModule({
@@ -54,7 +58,9 @@ import { TreeElementComponent } from './elements/tree/tree-element.component';
     ConnectElementComponent,
     CircleNodeComponent,
     TreeNavComponent,
-    TreeElementComponent
+    TreeElementComponent,
+    TimeFilterFormComponent,
+    HomeComponent
   ],
   imports: [
     CommonModule,
@@ -69,7 +75,9 @@ import { TreeElementComponent } from './elements/tree/tree-element.component';
   providers: [
     Server,
     SnomedAPI,
-    ConceptDetailService
+    ConceptDetailService,
+    QueryFilterService,
+    NavBusquedaService
   ],
   bootstrap: [AppComponent]
 })

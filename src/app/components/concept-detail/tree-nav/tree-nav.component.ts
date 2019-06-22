@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { SnomedAPI } from '../../../services/snomed.service';
 import { ConceptDetailService } from '../concept-detail.service';
 import * as d3 from 'd3';
@@ -21,36 +21,48 @@ export class TreeNavComponent implements OnInit {
         preferredTerm: 'conjunto de referencias de lenguaje para la extensión provincial de Neuquén (foundation metadata concept)'
     };
 
-    constructor(private snomed: SnomedAPI, private conceptDetailService: ConceptDetailService) { }
+    constructor(
+        private snomed: SnomedAPI,
+        private conceptDetailService: ConceptDetailService,
+        private cd: ChangeDetectorRef
+    ) { }
 
     public nodes = [];
     public edges = [];
 
     ngOnInit() {
         this.conceptDetailService.conceptSelected$.subscribe(concept => {
+            this.nodes = [];
+            this.edges = [];
+            this.concept = null;
+            this.cd.detectChanges();
 
             this.snomed.concepts(concept.statedAncestors).subscribe((conceptos) => {
-                let count = 0;
-                [concept, ...conceptos].forEach((ct) => {
-                    this.nodes.push({
-                        ...ct,
-                        count: count++
-                    });
-                });
+                const ids = [concept, ...conceptos].map(i => i.conceptId);
+                this.snomed.history(ids).subscribe((numbers) => {
 
-                [concept, ...conceptos].forEach((ct) => {
-                    const rel = isARel(ct.relationships || []);
-                    rel.forEach(r => {
-                        this.edges.push({
-                            source: ct.conceptId,
-                            target: r.destination.conceptId,
-                            value: 1,
+                    let count = 0;
+                    [concept, ...conceptos].forEach((ct) => {
+                        this.nodes.push({
+                            ...ct,
+                            count: count++,
+                            estadistica: numbers[ct.conceptId]
                         });
                     });
+
+                    [concept, ...conceptos].forEach((ct) => {
+                        const rel = isARel(ct.relationships || []);
+                        rel.forEach(r => {
+                            this.edges.push({
+                                source: ct.conceptId,
+                                target: r.destination.conceptId,
+                                value: 1,
+                            });
+                        });
+                    });
+                    this.concept = concept;
+
                 });
-                this.concept = concept;
-
-
             });
         });
     }

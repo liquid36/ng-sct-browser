@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, Input, ViewChild, ElementRef, ViewEncapsulation } from '@angular/core';
+import { Component, AfterViewInit, Input, ViewChild, ElementRef, ViewEncapsulation, OnChanges } from '@angular/core';
 import * as dagreD3 from 'dagre-d3';
 import * as d3 from 'd3';
 import * as zoomd3 from 'd3-zoom';
@@ -9,7 +9,7 @@ import * as zoomd3 from 'd3-zoom';
     styleUrls: ['./tree-element.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class TreeElementComponent implements AfterViewInit {
+export class TreeElementComponent implements AfterViewInit, OnChanges {
     public concept = null;
     public refSetLanguage = {
         conceptId: '231000013101',
@@ -23,7 +23,21 @@ export class TreeElementComponent implements AfterViewInit {
     @Input() public nodes = [];
     @Input() public edges = [];
 
+    ngOnChanges() {
+        this.reload();
+    }
+
     ngAfterViewInit() {
+        this.reload();
+    }
+
+    removeSemtag(label: string) {
+        const index = label.indexOf('(');
+        return label.substring(0, index - 1);
+    }
+
+    reload() {
+        this.contenedor.nativeElement.innerHtml = '';
         const g = new dagreD3.graphlib.Graph()
             .setGraph({})
             .setDefaultEdgeLabel(() => ({}));
@@ -33,7 +47,10 @@ export class TreeElementComponent implements AfterViewInit {
             if (node.definitionStatus === '900000000000074008') {
                 nodeClass = 'type-primitive';
             }
-            g.setNode(node.conceptId, { label: node.preferredTerm, class: nodeClass });
+            g.setNode(node.conceptId, {
+                label: this.removeSemtag(node.preferredTerm) + ` (${node.estadistica.total}/${node.estadistica.exact})`,
+                class: nodeClass
+            });
         });
 
         this.edges.forEach((link) => {
@@ -74,6 +91,10 @@ export class TreeElementComponent implements AfterViewInit {
         // zoom.translate(translate);
         // zoom.scale(zoomScale);
         // zoom.event(svg.transition().duration(500));
+        const inner = d3.select(this.contenedor.nativeElement).select('svg g');
+        inner.selectAll('g.node').on('click', (id) => {
+            console.log(id);
+        });
     }
 
 }
