@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { ConceptDetailService } from '../concept-detail.service';
-import { SctBoxComponent } from 'src/app/elements/graph/sct-box.svg';
+import { QueryFilterService } from 'src/app/services/queryfilter.service';
 
 @Component({
-  selector: 'app-graph-nav',
-  templateUrl: './graph-nav.component.html',
-  styleUrls: ['./graph-nav.component.scss']
+    selector: 'app-graph-nav',
+    templateUrl: './graph-nav.component.html',
+    styleUrls: ['./graph-nav.component.scss']
 })
 export class GraphNavComponent implements OnInit {
     public concept: any;
@@ -49,7 +49,7 @@ export class GraphNavComponent implements OnInit {
 
     offsetGroupAttrY(index) {
         let y = 0;
-        for (let i = 1; i <= index; i ++) {
+        for (let i = 1; i <= index; i++) {
             y += this.getAttributeGroup[i - 1].length * (39 + 25);
         }
         return y;
@@ -62,8 +62,8 @@ export class GraphNavComponent implements OnInit {
     get isARel() {
         if (this.concept) {
             return this.concept.relationships.filter((rel) => rel.active && rel.destination)
-                                             .filter(rel => rel.type.conceptId === '116680003')
-                                             .filter(rel => rel.characteristicType.conceptId === '900000000000010007');
+                .filter(rel => rel.type.conceptId === '116680003')
+                .filter(rel => rel.characteristicType.conceptId === this.qf.form);
         }
         return [];
     }
@@ -71,33 +71,36 @@ export class GraphNavComponent implements OnInit {
     get zeroAttribute() {
         if (this.concept) {
             return this.concept.relationships.filter((rel) => rel.active && rel.destination)
-                                             .filter(rel => rel.type.conceptId !== '116680003')
-                                             .filter(rel => rel.relationshipGroup === 0)
-                                             .filter(rel => rel.characteristicType.conceptId === '900000000000010007');
+                .filter(rel => rel.type.conceptId !== '116680003')
+                .filter(rel => rel.relationshipGroup === 0)
+                .filter(rel => rel.characteristicType.conceptId === this.qf.form);
         }
         return [];
     }
 
     get getAttributeGroup() {
         const maxGroup = this.concept.relationships
-                            .filter((rel) => rel.active && rel.destination)
-                            .filter(rel => rel.type.conceptId !== '116680003')
-                            .filter(rel => rel.characteristicType.conceptId === '900000000000010007')
-                            .reduce((a, b) => Math.max(a, b.relationshipGroup), 0);
+            .filter((rel) => rel.active && rel.destination)
+            .filter(rel => rel.type.conceptId !== '116680003')
+            .filter(rel => rel.characteristicType.conceptId === this.qf.form)
+            .reduce((a, b) => Math.max(a, b.relationshipGroup), 0);
         const result = [];
         for (let i = 1; i <= maxGroup; i++) {
             result.push(
                 this.concept.relationships
-                            .filter((rel) => rel.active && rel.destination)
-                            .filter(rel => rel.type.conceptId !== '116680003')
-                            .filter(rel => rel.characteristicType.conceptId === '900000000000010007')
-                            .filter(rel => rel.relationshipGroup === i)
+                    .filter((rel) => rel.active && rel.destination)
+                    .filter(rel => rel.type.conceptId !== '116680003')
+                    .filter(rel => rel.characteristicType.conceptId === this.qf.form)
+                    .filter(rel => rel.relationshipGroup === i)
             );
         }
         return result;
     }
 
-    constructor(private cd: ChangeDetectorRef, private conceptDetailService: ConceptDetailService) {}
+    constructor(
+        private cd: ChangeDetectorRef,
+        private conceptDetailService: ConceptDetailService,
+        private qf: QueryFilterService) { }
     ngOnInit() {
         this.conceptDetailService.conceptSelected$.subscribe(concept => {
             this.concept = concept;

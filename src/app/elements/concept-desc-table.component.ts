@@ -44,8 +44,8 @@ function sortTerm(a, b) {
 }
 
 @Component({
-  selector: 'app-concept-desc-table',
-  templateUrl: './concept-desc-table.component.html'
+    selector: 'app-concept-desc-table',
+    templateUrl: './concept-desc-table.component.html'
 })
 export class ConceptDescTableComponent {
     public static ISA = '116680003';
@@ -55,12 +55,18 @@ export class ConceptDescTableComponent {
     constructor(
         private snomed: SnomedAPI,
         private conceptDetailService: ConceptDetailService
-    ) {}
-
+    ) { }
+    public termCount = {};
     private conceptTemp;
     @Input() refSetLanguage;
     @Input() set concept(value) {
         this.conceptTemp = value;
+        this.snomed.terms(this.conceptTemp.conceptId).subscribe(stats => {
+            this.termCount = {};
+            stats.forEach((item) => {
+                this.termCount[item._id] = item.count;
+            });
+        });
 
     }
 

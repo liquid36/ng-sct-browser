@@ -18,7 +18,7 @@
             </div>
         </div>
     </div>
-    <div class="form-group">
+    <div class="form-group pr-2">
         <div class="input-group">
             <input class="form-control" placeholder="Hasta" name="dph" [(ngModel)]="hasta" ngbDatepicker
                    #dh="ngbDatepicker" (dateSelect)="onEndDate($event)">
@@ -27,6 +27,19 @@
                     <i class="mdi mdi-calendar"></i>
                 </button>
             </div>
+        </div>
+    </div>
+    <div ngbDropdown>
+        <button ngbDropdownToggle class="btn btn-block dropdown-toggle" type="button">
+            {{ qf.relationship$ | async }}
+        </button>
+        <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <button ngbDropdownItem (click)="setRelationshipMode('stated')">
+                Stated Relationship
+            </button>
+            <button ngbDropdownItem (click)="setRelationshipMode('inferred')">
+                Inferred Relationship
+            </button>
         </div>
     </div>
 </form>

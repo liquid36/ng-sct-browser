@@ -21,7 +21,7 @@ import { SummaryNavComponent } from './components/concept-detail/summary-nav/sum
 import { ConceptNameComponent } from './elements/concept-name.component';
 import { ConceptParentComponent } from './elements/concept-parent.component';
 import { ConceptChildrenComponent } from './elements/concept-children.component';
-import { DemografiaNavComponent } from './components/concept-detail/demografia-nav/demografia-nav.component';
+import { DemografiaNavComponent } from './components/estadisticas-nav/demografia-nav/demografia-nav.component';
 import { TaxonomyNavComponent } from './components/taxonomy-nav/taxonomy-nav.component';
 import { DetailNavComponent } from './components/concept-detail/detail-nav/detail-nav.component';
 import { ConceptDescTableComponent } from './elements/concept-desc-table.component';
@@ -37,6 +37,8 @@ import { QueryFilterService } from './services/queryfilter.service';
 import { TimeFilterFormComponent } from './components/time-filter-form/time-filter-form.component';
 import { HomeComponent } from './components/home/home.component';
 import { NavBusquedaService } from './components/nav-busqueda/nav-busqueda.service';
+import { EstadisticasNavComponent } from './components/estadisticas-nav/estadisticas-nav.component';
+import { TableSetComponent } from './elements/table-set/table-set.component';
 
 
 @NgModule({
@@ -60,7 +62,9 @@ import { NavBusquedaService } from './components/nav-busqueda/nav-busqueda.servi
     TreeNavComponent,
     TreeElementComponent,
     TimeFilterFormComponent,
-    HomeComponent
+    HomeComponent,
+    EstadisticasNavComponent,
+    TableSetComponent
   ],
   imports: [
     CommonModule,

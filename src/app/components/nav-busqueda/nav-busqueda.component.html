@@ -42,9 +42,9 @@
                     </div>
                 </div>
                 <div *ngIf="semanticFilter.length > 0">
-                    <a class="badge badge-danger" href="#" (click)="setSemTag('')">
+                    <div class="badge badge-danger" (click)="setSemTag('')">
                         {{ semanticFilter }} X
-                    </a>
+                    </div>
                 </div>
                 <div class="card card-default mt-2" *ngIf="semanticFilter.length === 0 && filters">
                     <div class="card-header">
@@ -54,13 +54,13 @@
                     </div>
                     <div class="card-body p-0">
                         <div class="list-group">
-                            <a href="#" class="list-group-item d-flex justify-content-between align-items-center"
-                               *ngFor="let item of filters.semTag | keyvalue" (click)="setSemTag(item.key)">
+                            <div class="list-group-item d-flex justify-content-between align-items-center"
+                                 *ngFor="let item of filters.semTag | keyvalue" (click)="setSemTag(item.key)">
                                 {{ item.key }}
                                 <span class="badge badge-primary badge-pill">
                                     {{ item.value }}
                                 </span>
-                            </a>
+                            </div>
                         </div>
                     </div>
                 </div>

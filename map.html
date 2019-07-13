@@ -1,0 +1,56 @@
+<html style="height: 100%; width: 100%">
+
+<body style="height: 100%; width: 100%">
+    <div id="map" style="height: 100%; width: 100%">
+
+    </div>
+
+    <script type="text/javascript"
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC__of8PZKirB_IvkjzI7XTlfYtLieGRh0&libraries=visualization"></script>
+
+    <script>
+        function heat(heatmapData) {
+            var neuquen = new google.maps.LatLng(-38.9516784, -68.0591888);
+
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: neuquen,
+                zoom: 13,
+                mapTypeId: 'satellite'
+            });
+
+            var heatmap = new google.maps.visualization.HeatmapLayer({
+                data: heatmapData,
+                maxIntensity: 25,
+            });
+            heatmap.setMap(map);
+            heatmap.set('radius', 12);
+            heatmap.set('opacity', 0.8);
+            // heatmap.set('dissipating', true)
+        }
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const myParam = urlParams.get('conceptid');
+
+        function httpGetAsync(theUrl, callback) {
+            var xmlHttp = new XMLHttpRequest();
+            xmlHttp.onreadystatechange = function () {
+                if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+                    callback(xmlHttp.responseText);
+            }
+            xmlHttp.open("GET", theUrl, true); // true for asynchronous 
+            xmlHttp.send(null);
+        }
+
+        httpGetAsync('http://localhost:3001/andes/rup/maps?conceptId=' + myParam, function (response) {
+            let arr = JSON.parse(response);
+            arr = arr.map(function (item) {
+                return { location: new google.maps.LatLng(item.lat, item.lng), weight: 2 }
+            });
+            heat(arr);
+        });
+
+    </script>
+
+</body>
+
+</html>

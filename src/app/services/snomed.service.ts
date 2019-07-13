@@ -9,11 +9,18 @@ import { QueryFilterService } from './queryfilter.service';
 export class SnomedAPI {
     constructor(private http: Server, private qf: QueryFilterService) {
         this.http.setBaseURL('http://localhost:3001');
+
+        this.qf.onChange$.subscribe(() => {
+            Object.keys(this.conceptBS).forEach(key => {
+                this.conceptBS[key].next({ total: 0, children: 0, exact: 0 });
+            });
+        });
     }
     private database = 'es-edition';
     private version = 'v20180919';
     private path = '/snomed';
     private cache = {};
+    private conceptBS = {};
 
     descriptions(params) {
         return this.http.get(`${this.path}/${this.database}/${this.version}/descriptions`, { params });
@@ -32,11 +39,20 @@ export class SnomedAPI {
     }
 
     parents(sctid) {
-        return this.http.get(`${this.path}/${this.database}/${this.version}/concepts/${sctid}/parents`, { params: { form: 'stated' } });
+        const form = this.qf.relationship;
+        return this.http.get(`${this.path}/${this.database}/${this.version}/concepts/${sctid}/parents`, { params: { form } });
     }
 
     children(sctid) {
-        return this.http.get(`${this.path}/${this.database}/${this.version}/concepts/${sctid}/children`, { params: { form: 'stated' } });
+        const form = this.qf.relationship;
+        return this.http.get(`${this.path}/${this.database}/${this.version}/concepts/${sctid}/children`, { params: { form } });
+    }
+
+    stats(id) {
+        if (!this.conceptBS[id]) {
+            this.conceptBS[id] = new BehaviorSubject({ total: 0, exact: 0, children: 0 });
+        }
+        return this.conceptBS[id];
     }
 
     history(sctids: string[]) {
@@ -49,6 +65,11 @@ export class SnomedAPI {
             return this.http.post(`/andes/rup`, { concepts: reals, start, end, organizacion }).pipe(map(data => {
                 const res = {};
                 sctids.forEach(c => {
+                    if (this.conceptBS[c]) {
+                        this.conceptBS[c].next(data[c]);
+                    } else {
+                        this.conceptBS[c] = new BehaviorSubject(data[c]);
+                    }
                     if (this.cache[c]) {
                         res[c] = this.cache[c];
                     } else {
@@ -66,8 +87,20 @@ export class SnomedAPI {
         }
     }
 
-    demografia(sctid) {
-        return this.http.post(`/andes/rup/demografia`, { conceptId: sctid });
+    demografia(sctid, rangoEtario) {
+        const start = this.qf.start;
+        const end = this.qf.end;
+        const organizacion = this.qf.organizacion ? this.qf.organizacion.id : null;
+
+        return this.http.post(`/andes/rup/demografia`, { conceptId: sctid, rango: rangoEtario, start, end, organizacion });
+    }
+
+    terms(sctid) {
+        const start = this.qf.start;
+        const end = this.qf.end;
+        const organizacion = this.qf.organizacion ? this.qf.organizacion.id : null;
+
+        return this.http.post(`/andes/rup/terms`, { conceptId: sctid, start, end, organizacion });
     }
 
     organizaciones(search) {

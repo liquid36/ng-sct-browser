@@ -1,0 +1,34 @@
+<div class="card card-default">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-8">
+                <strong>Estadisticas de {{ title }}</strong>
+            </div>
+        </div>
+    </div>
+    <ngb-tabset>
+        <ngb-tab title="Pacientes">
+            <ng-template ngbTabContent>
+                <app-demografia-nav [data]="rangoEtarioTable" (rangoChange)="refresh($event)"></app-demografia-nav>
+            </ng-template>
+        </ngb-tab>
+        <ngb-tab title="Prestaciones">
+            <ng-template ngbTabContent>
+                <h5> Prestaciones </h5>
+                <app-table-set [values]="prestacionesTable"></app-table-set>
+            </ng-template>
+        </ngb-tab>
+        <ngb-tab title="Profesionales">
+            <ng-template ngbTabContent>
+                <h5> Profesionales </h5>
+                <app-table-set [values]="profesionalesTable"></app-table-set>
+            </ng-template>
+        </ngb-tab>
+        <ngb-tab title="Organizaciones">
+            <ng-template ngbTabContent>
+                <h5> Organizaciones </h5>
+                <app-table-set [values]="organizacionesTable"></app-table-set>
+            </ng-template>
+        </ngb-tab>
+    </ngb-tabset>
+</div>

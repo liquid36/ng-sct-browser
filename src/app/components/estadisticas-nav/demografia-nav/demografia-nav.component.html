@@ -1,0 +1,54 @@
+<div class="row m-2">
+    <div class="col">
+        <div class="d-flex justify-content-between">
+            <h5>
+                Rango Etario
+            </h5>
+            <div ngbDropdown>
+                <button ngbDropdownToggle class="btn btn-info dropdown-toggle" type="button">
+                    Cambiar escala
+                </button>
+                <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <button ngbDropdownItem (click)="changeRangoEtario('nacional')">
+                        Rango Etario Nacional
+                    </button>
+                    <button ngbDropdownItem (click)="changeRangoEtario('provincial')">
+                        Rango Etario Provincial
+                    </button>
+                </div>
+            </div>
+        </div>
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">Sexo</th>
+                    <th scope="col" *ngFor="let i of rangoEtario"> {{ i }} </th>
+                    <th scope="col">Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Masculino</td>
+                    <td *ngFor="let j of indices">
+                        {{ tableDemografia[0][j] }}
+                    </td>
+                    <td> {{ tableDemografia[0][numCols] }} </td>
+                </tr>
+                <tr>
+                    <td>Femenino</td>
+                    <td *ngFor="let j of indices">
+                        {{ tableDemografia[1][j] }}
+                    </td>
+                    <td> {{ tableDemografia[1][numCols] }} </td>
+                </tr>
+                <tr>
+                    <td>Total</td>
+                    <td *ngFor="let j of indices">
+                        {{ tableDemografia[2][j] }}
+                    </td>
+                    <td> {{ tableDemografia[2][numCols] }} </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

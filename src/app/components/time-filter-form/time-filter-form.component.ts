@@ -50,5 +50,9 @@ export class TimeFilterFormComponent {
         this.qf.organizacion = $event.item;
     }
 
+    setRelationshipMode(type) {
+        this.qf.relationship = type;
+    }
+
 
 }

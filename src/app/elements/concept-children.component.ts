@@ -1,11 +1,12 @@
 import { Component, Input } from '@angular/core';
 import { SnomedAPI } from '../services/snomed.service';
 import { ConceptDetailService } from '../components/concept-detail/concept-detail.service';
+import { QueryFilterService } from '../services/queryfilter.service';
 
 @Component({
-  selector: 'app-concept-children',
-  templateUrl: './concept-children.component.html',
-  styleUrls: ['./concept-children.component.scss']
+    selector: 'app-concept-children',
+    templateUrl: './concept-children.component.html',
+    styleUrls: ['./concept-children.component.scss']
 })
 export class ConceptChildrenComponent {
     public static ISA = '116680003';
@@ -14,8 +15,13 @@ export class ConceptChildrenComponent {
 
     constructor(
         private snomed: SnomedAPI,
-        private conceptDetailService: ConceptDetailService
-    ) {}
+        private conceptDetailService: ConceptDetailService,
+        private qf: QueryFilterService
+    ) {
+        this.qf.onChange$.subscribe(() => {
+            this.snomed.history(this.relatioships.map(c => c.conceptId)).subscribe(() => { });
+        });
+    }
 
     private conceptTemp;
     public relatioships: any[] = [];
@@ -31,10 +37,10 @@ export class ConceptChildrenComponent {
     getStats(conceptos) {
         const scts = conceptos.map(e => e.conceptId);
         this.snomed.history(scts).subscribe((stats) => {
-            conceptos.forEach(c => {
-                c._stats = stats[c.conceptId];
-            });
-            this.relatioships = [...this.relatioships];
+            // conceptos.forEach(c => {
+            //     c._stats = stats[c.conceptId];
+            // });
+            // this.relatioships = [...this.relatioships];
         });
     }
 
@@ -51,13 +57,13 @@ export class ConceptChildrenComponent {
                     ...this.relatioships.slice(0, index + 1),
                     ...children,
                     ...this.relatioships.slice(index + 1)
-                 ];
+                ];
                 this.getStats(children);
             });
         } else {
             relationship._expanded = false;
             const myLevel = relationship._level;
-            for (let i = index + 1 ; i < this.relatioships.length; i++) {
+            for (let i = index + 1; i < this.relatioships.length; i++) {
                 if (this.relatioships[i]._level > myLevel) {
                     this.relatioships.splice(i, 1);
                     i--;

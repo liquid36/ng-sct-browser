@@ -6,18 +6,18 @@
         &nbsp;&nbsp;
         {{ concept.fullySpecifiedName }}
         <!-- ( {{ concept.semtag }} ) -->
-        
+
 
     </h5>
     <h6>
-        SCTID: {{ concept.conceptId }} 
-        <br/>
-        <br/>
+        SCTID: {{ concept.conceptId }}
+        <br />
+        <br />
         {{ concept.conceptId }} | {{ concept.fullySpecifiedName }}
-        <br/>
-        <ng-container *ngIf="stats"> 
-            Total: {{ stats.total }} <br/>
-            Exactos: {{ stats.exact }} <br/>
+        <br />
+        <ng-container *ngIf="(snomed.stats(concept.conceptId) | async) as stats">
+            Total: {{ stats.total }} <br />
+            Exactos: {{ stats.exact }} <br />
             Descendientes: {{ stats.children }}
         </ng-container>
     </h6>

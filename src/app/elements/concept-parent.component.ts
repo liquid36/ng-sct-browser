@@ -1,11 +1,12 @@
 import { Component, Input } from '@angular/core';
 import { SnomedAPI } from '../services/snomed.service';
 import { ConceptDetailService } from '../components/concept-detail/concept-detail.service';
+import { QueryFilterService } from '../services/queryfilter.service';
 
 @Component({
-  selector: 'app-concept-parent',
-  templateUrl: './concept-parent.component.html',
-  styleUrls: ['./concept-parent.component.scss']
+    selector: 'app-concept-parent',
+    templateUrl: './concept-parent.component.html',
+    styleUrls: ['./concept-parent.component.scss']
 })
 export class ConceptParentComponent {
     public static ISA = '116680003';
@@ -14,8 +15,13 @@ export class ConceptParentComponent {
 
     constructor(
         private snomed: SnomedAPI,
-        private conceptDetailService: ConceptDetailService
-    ) {}
+        private conceptDetailService: ConceptDetailService,
+        private qf: QueryFilterService
+    ) {
+        this.qf.onChange$.subscribe(() => {
+            this.snomed.history(this.relatioships.map(c => c.conceptId)).subscribe(() => { });
+        });
+    }
 
     private conceptTemp;
     public relatioships: any[];
@@ -56,7 +62,7 @@ export class ConceptParentComponent {
                     ...this.relatioships.slice(0, index > 0 ? index : 0),
                     ...parents,
                     ...this.relatioships.slice(index)
-                 ];
+                ];
                 this.getStats(parents);
             });
         } else {
