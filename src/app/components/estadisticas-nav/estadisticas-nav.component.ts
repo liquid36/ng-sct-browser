@@ -14,6 +14,7 @@ export class EstadisticasNavComponent implements OnInit {
     intervalosTable;
     rangoEtarioTable;
     organizacionesTable;
+    clusterTable;
 
     title = '';
 
@@ -35,6 +36,9 @@ export class EstadisticasNavComponent implements OnInit {
                     this.profesionalesTable = stats.profesionales;
                     this.intervalosTable = stats.fechas;
                     this.organizacionesTable = stats.organizaciones;
+                });
+                this.snomed.cluster(concept.conceptId).subscribe(stats => {
+                    this.clusterTable = stats;
                 });
             }
         });

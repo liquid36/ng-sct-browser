@@ -30,5 +30,11 @@
                 <app-table-set [values]="organizacionesTable"></app-table-set>
             </ng-template>
         </ngb-tab>
+        <ngb-tab title="Trastornos asociados">
+            <ng-template ngbTabContent>
+                <h5> Trastornos en común con {{ title }} </h5>
+                <app-table-set [values]="clusterTable"></app-table-set>
+            </ng-template>
+        </ngb-tab>
     </ngb-tabset>
 </div>

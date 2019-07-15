@@ -95,6 +95,14 @@ export class SnomedAPI {
         return this.http.post(`/andes/rup/demografia`, { conceptId: sctid, rango: rangoEtario, start, end, organizacion });
     }
 
+    cluster(sctid) {
+        const start = this.qf.start;
+        const end = this.qf.end;
+        const organizacion = this.qf.organizacion ? this.qf.organizacion.id : null;
+
+        return this.http.post(`/andes/rup/cluster`, { conceptId: sctid });
+    }
+
     terms(sctid) {
         const start = this.qf.start;
         const end = this.qf.end;
