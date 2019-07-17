@@ -40,6 +40,7 @@ import { NavBusquedaService } from './components/nav-busqueda/nav-busqueda.servi
 import { EstadisticasNavComponent } from './components/estadisticas-nav/estadisticas-nav.component';
 import { TableSetComponent } from './elements/table-set/table-set.component';
 
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   declarations: [
@@ -74,7 +75,10 @@ import { TableSetComponent } from './elements/table-set/table-set.component';
     AppRoutingModule,
     NgbModule,
     AngularSplitModule,
-    CdkTreeModule
+    CdkTreeModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyC__of8PZKirB_IvkjzI7XTlfYtLieGRh0&libraries=visualization'
+    })
   ],
   providers: [
     Server,

@@ -36,5 +36,10 @@
                 <app-table-set [values]="clusterTable"></app-table-set>
             </ng-template>
         </ngb-tab>
+        <ngb-tab title="Mapa de calor">
+            <ng-template ngbTabContent>
+                <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" (mapReady)="onMap($event)"></agm-map>
+            </ng-template>
+        </ngb-tab>
     </ngb-tabset>
 </div>

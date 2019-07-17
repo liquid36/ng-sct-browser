@@ -4,11 +4,11 @@ import { Server } from './server.service';
 import { map } from 'rxjs/operators';
 import { of, BehaviorSubject } from 'rxjs';
 import { QueryFilterService } from './queryfilter.service';
-
+import { environment } from '../../environments/environment';
 @Injectable()
 export class SnomedAPI {
     constructor(private http: Server, private qf: QueryFilterService) {
-        this.http.setBaseURL('http://localhost:3001');
+        this.http.setBaseURL(environment.API_URL);
 
         this.qf.onChange$.subscribe(() => {
             Object.keys(this.conceptBS).forEach(key => {
@@ -101,6 +101,14 @@ export class SnomedAPI {
         const organizacion = this.qf.organizacion ? this.qf.organizacion.id : null;
 
         return this.http.post(`/andes/rup/cluster`, { conceptId: sctid });
+    }
+
+    maps(sctid) {
+        const start = this.qf.start;
+        const end = this.qf.end;
+        const organizacion = this.qf.organizacion ? this.qf.organizacion.id : null;
+
+        return this.http.post(`/andes/rup/maps`, { conceptId: sctid });
     }
 
     terms(sctid) {
