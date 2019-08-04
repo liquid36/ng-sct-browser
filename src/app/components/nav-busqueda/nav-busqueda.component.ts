@@ -63,9 +63,11 @@ export class NavBusquedaComponent implements OnInit {
         if (this.semanticFilter.length > 0) {
             params.semanticFilter = this.semanticFilter;
         }
+
         return this.snomed.descriptions(params).subscribe((result) => {
             this.matches = result.matches;
             this.filters = result.filters;
+            this.snomed.history(this.matches.map(c => c.conceptId)).subscribe(() => { });
         });
     }
 

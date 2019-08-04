@@ -88,6 +88,11 @@
                                         {{ concept.definitionStatus === '900000000000073002' ? '≡' : '&nbsp;&nbsp;' }}
                                     </span>
                                     {{ concept.term }}
+                                    <ng-container *ngIf="(snomed.stats(concept.conceptId) | async) as stats">
+                                        <span class="badge badge-primary badge-pill" *ngIf="stats.total > 0">
+                                            {{ stats.exact }} | {{ stats.children }}
+                                        </span>
+                                    </ng-container>
                                 </td>
                                 <td class="w-50 text-muted small-text result-item">
                                     {{ concept.fsn }}

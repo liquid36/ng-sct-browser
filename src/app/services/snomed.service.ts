@@ -122,4 +122,8 @@ export class SnomedAPI {
     organizaciones(search) {
         return this.http.get('/andes/organizaciones', { params: { search } });
     }
+
+    semanticTags(search) {
+        return this.http.get('/andes/semanticTags', { params: { search } });
+    }
 }

@@ -9,6 +9,7 @@ import { ConceptDetailService } from '../../concept-detail/concept-detail.servic
 export class DemografiaNavComponent implements OnInit {
     @Output() rangoChange = new EventEmitter();
 
+    @Input() localidades;
     @Input() set data(value) {
         this.crearTabla();
         if (value) {

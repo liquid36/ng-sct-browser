@@ -24,6 +24,7 @@ export class EstadisticasNavComponent implements OnInit {
     rangoEtarioTable;
     organizacionesTable;
     clusterTable;
+    localidadesTable;
 
     title = '';
 
@@ -48,6 +49,7 @@ export class EstadisticasNavComponent implements OnInit {
                     this.profesionalesTable = stats.profesionales;
                     this.intervalosTable = stats.fechas;
                     this.organizacionesTable = stats.organizaciones;
+                    this.localidadesTable = stats.localidades;
                 });
                 this.snomed.cluster(concept.conceptId).subscribe(stats => {
                     this.clusterTable = stats;

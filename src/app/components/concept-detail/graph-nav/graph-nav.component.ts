@@ -107,6 +107,8 @@ export class GraphNavComponent implements OnInit {
         });
     }
 
-
+    selectConcept(concept) {
+        this.conceptDetailService.select(concept);
+    }
 
 }

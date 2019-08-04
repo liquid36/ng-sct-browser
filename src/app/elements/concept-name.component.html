@@ -6,8 +6,6 @@
         &nbsp;&nbsp;
         {{ concept.fullySpecifiedName }}
         <!-- ( {{ concept.semtag }} ) -->
-
-
     </h5>
     <h6>
         SCTID: {{ concept.conceptId }}
@@ -22,3 +20,15 @@
         </ng-container>
     </h6>
 </div>
+
+<!-- <div class="fsn-card green">
+    <h6>
+        <ng-container *ngIf="(snomed.stats(concept.conceptId) | async) as stats">
+            Registros que contienen el concepto seleccionado o alguno de sus descendientes: {{ stats.total }}
+            <br />
+            Registros que contienen el concepto seleccionado: {{ stats.exact }}
+            <br />
+            Registros que contienen alguno de sus decendientes: {{ stats.children }}
+        </ng-container>
+    </h6>
+</div> -->

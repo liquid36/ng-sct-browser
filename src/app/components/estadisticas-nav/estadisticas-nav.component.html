@@ -9,7 +9,8 @@
     <ngb-tabset>
         <ngb-tab title="Pacientes">
             <ng-template ngbTabContent>
-                <app-demografia-nav [data]="rangoEtarioTable" (rangoChange)="refresh($event)"></app-demografia-nav>
+                <app-demografia-nav [data]="rangoEtarioTable" (rangoChange)="refresh($event)"
+                                    [localidades]="localidadesTable"></app-demografia-nav>
             </ng-template>
         </ngb-tab>
         <ngb-tab title="Prestaciones">
@@ -30,9 +31,9 @@
                 <app-table-set [values]="organizacionesTable"></app-table-set>
             </ng-template>
         </ngb-tab>
-        <ngb-tab title="Trastornos asociados">
+        <ngb-tab title="Conceptos asociados">
             <ng-template ngbTabContent>
-                <h5> Trastornos en común con {{ title }} </h5>
+                <h5> Conceptos en común con {{ title }} </h5>
                 <app-table-set [values]="clusterTable"></app-table-set>
             </ng-template>
         </ngb-tab>
