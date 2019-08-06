@@ -17,7 +17,7 @@ export class SnomedAPI {
         });
     }
     private database = 'es-edition';
-    private version = 'v20180919';
+    private version = 'v20190722';
     private path = '/snomed';
     private cache = {};
     private conceptBS = {};
