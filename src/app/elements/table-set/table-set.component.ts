@@ -11,6 +11,7 @@ export class TableSetComponent implements OnInit {
 
     public hasExact = false;
     public hasPrimera = false;
+    public hasPaciente = false;
 
     @Input() titulo = '';
     @Input() type = 'bar';
@@ -22,6 +23,7 @@ export class TableSetComponent implements OnInit {
             const item = this.data[0];
             this.hasExact = item.hasOwnProperty('exact');
             this.hasPrimera = item.hasOwnProperty('primera');
+            this.hasPaciente = item.hasOwnProperty('pacientes');
         }
     }
 
