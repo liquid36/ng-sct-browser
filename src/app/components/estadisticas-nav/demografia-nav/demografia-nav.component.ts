@@ -25,9 +25,9 @@ export class DemografiaNavComponent implements OnInit {
         }
     }
 
-    public rangoEtario = [0, 1, 5, 10, 20, 30, 40, 50, 60, 70, 80, 90];
-    public nacional = [0, 1, 5, 10, 20, 30, 40, 50, 60, 70, 80, 90];
-    public provincial = [0, 1, 10, 20, 30, 40, 50, 60, 70, 80, 90];
+    public rangoEtario = [0, 1, 2, 6, 10, 15, 50];
+    public nacional = [0, 1, 2, 6, 10, 15, 50];
+    public provincial = [0, 1, 5, 15, 20, 40, 70];
 
 
     public conceptSelected = null;
