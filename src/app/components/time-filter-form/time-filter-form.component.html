@@ -13,15 +13,15 @@
                 <button class="btn btn-outline-secondary calendar" (click)="dd.toggle()" type="button">
                     <i class="mdi mdi-calendar"></i>
                 </button>
-                <input class="form-control" placeholder="Desde" name="dp" [(ngModel)]="desde" ngbDatepicker
-                       #dd="ngbDatepicker" (dateSelect)="onStartDate($event)">
+                <input class="form-control" placeholder="Desde" name="dp" ngbDatepicker #dd="ngbDatepicker"
+                       (dateSelect)="onStartDate($event)">
             </div>
         </div>
     </div>
     <div class="form-group pr-2">
         <div class="input-group">
-            <input class="form-control" placeholder="Hasta" name="dph" [(ngModel)]="hasta" ngbDatepicker
-                   #dh="ngbDatepicker" (dateSelect)="onEndDate($event)">
+            <input class="form-control" placeholder="Hasta" name="dph" ngbDatepicker #dh="ngbDatepicker"
+                   (dateSelect)="onEndDate($event)">
             <div class="input-group-append">
                 <button class="btn btn-outline-secondary" (click)="dh.toggle()" type="button">
                     <i class="mdi mdi-calendar"></i>

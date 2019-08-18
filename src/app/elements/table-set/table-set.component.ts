@@ -7,7 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 
 export class TableSetComponent implements OnInit {
-    private data: any;
+    public data: any;
 
     public hasExact = false;
     public hasPrimera = false;

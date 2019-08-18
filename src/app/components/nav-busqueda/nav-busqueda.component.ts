@@ -29,7 +29,7 @@ export class NavBusquedaComponent implements OnInit {
     public lastSearch = '';
     private searchMode = 'partialMatching';
     private statusFilter = 'activeOnly';
-    private semanticFilter = '';
+    public semanticFilter = '';
 
     constructor(
         private snomed: SnomedAPI,
