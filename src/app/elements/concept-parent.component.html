@@ -24,7 +24,10 @@
 
             <ng-container *ngIf="(snomed.stats(relacion.conceptId) | async) as stats">
                 <span class="badge badge-primary badge-pill" *ngIf="stats.total > 0">
-                    {{ stats.exact }} | {{ stats.children }}
+                    {{ stats.exact | number }}
+                </span>
+                <span class="badge badge-warning badge-pill" *ngIf="stats.total > 0">
+                    {{ stats.children | number }}
                 </span>
             </ng-container>
         </li>

@@ -32,7 +32,8 @@ html {
 .badge {
     text-transform: uppercase;
     margin-left: 3px;
-    }
+    font-size: 85% !important;
+}
 
 .badge-md {
     font-size: 0.85rem;
@@ -42,8 +43,9 @@ html {
   }
   
 .badge-primary {
-    color: var(--primary);
-    border: solid 1px var(--primary);
+    color: var(--primary) !important;
+    border: solid 1px var(--primary) !important;
+    background-color: transparent !important;
   }
   
   a.badge-primary:hover, a.badge-primary:focus {
@@ -102,8 +104,9 @@ html {
   }
   
   .badge-warning {
-    color: var(--orange);
-    border: solid 1px var(--orange);
+    color: var(--orange) !important;
+    border: solid 1px var(--orange) !important;
+    background-color: transparent !important;
   }
   
   a.badge-warning:hover, a.badge-warning:focus {
