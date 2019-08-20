@@ -42,8 +42,9 @@
                     </div>
                 </div>
                 <div *ngIf="semanticFilter.length > 0">
-                    <div class="badge badge-danger" (click)="setSemTag('')">
-                        {{ semanticFilter }} X
+                    <div class="badge badge-teal badge-md d-flex justify-content-between flex-row align-items-center">
+                        {{ semanticFilter }}
+                        <span class="btn btn-danger btn-sm" (click)="setSemTag('')">x</span>
                     </div>
                 </div>
                 <div class="card card-default mt-2" *ngIf="semanticFilter.length === 0 && filters">
@@ -57,7 +58,7 @@
                             <div class="list-group-item d-flex justify-content-between align-items-center"
                                  *ngFor="let item of filters.semTag | keyvalue" (click)="setSemTag(item.key)">
                                 {{ item.key }}
-                                <span class="badge badge-primary badge-pill">
+                                <span class="badge badge-teal badge-pill">
                                     {{ item.value }}
                                 </span>
                             </div>
@@ -69,7 +70,7 @@
                 <form>
                     <div class="form-group">
                         <label>
-                            <strong> Type at least 3 characters </strong>
+                            <strong>Ingrese al menos 3 caracteres</strong>
                         </label>
                         <div class="btn-group w-100">
                             <input name="textSearch" type="search" class="form-control w-100" placeholder="Search..."
@@ -83,15 +84,22 @@
                     <table class="table table-bordered">
                         <tbody>
                             <tr *ngFor="let concept of matches">
-                                <td class="w-50" (click)="onSelect(concept)">
-                                    <span class="badge alert-warning" style="padding: 3px 7px;border-radius: 10px;">
-                                        {{ concept.definitionStatus === '900000000000073002' ? '≡' : '&nbsp;&nbsp;' }}
-                                    </span>
-                                    {{ concept.term }}
-                                    <ng-container *ngIf="(snomed.stats(concept.conceptId) | async) as stats">
-                                        <span class="badge badge-primary badge-pill" *ngIf="stats.total > 0">
-                                            {{ stats.exact }} | {{ stats.children }}
+                                <td class="d-flex flex-row justify-content-between h-100 align-items-center" (click)="onSelect(concept)">
+                                    <div class="justify-content-start">
+                                        <span class="badge alert-warning">
+                                            {{ concept.definitionStatus === '900000000000073002' ? '≡' : '&nbsp;&nbsp;' }}
                                         </span>
+                                        {{ concept.term }}
+                                    </div>
+                                    <ng-container *ngIf="(snomed.stats(concept.conceptId) | async) as stats">
+                                        <div class="justify-content-end">
+                                            <span class="badge badge-primary badge-pill" *ngIf="stats.total == 0">
+                                                {{ stats.exact }}
+                                            </span>
+                                            <span class="badge badge-warning badge-pill" *ngIf="stats.total == 0">
+                                                {{ stats.children }}
+                                            </span>
+                                        </div>
                                     </ng-container>
                                 </td>
                                 <td class="w-50 text-muted small-text result-item">
