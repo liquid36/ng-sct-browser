@@ -18,7 +18,7 @@ export class SnomedAPI {
     }
     private database = 'es-edition';
     private version = 'v20190722';
-    private path = '/api/snomed';
+    private path = '/snomed';
     private cache = {};
     private conceptBS = {};
 
@@ -62,7 +62,7 @@ export class SnomedAPI {
         const organizacion = this.qf.organizacion ? this.qf.organizacion.id : null;
 
         if (reals.length > 0) {
-            return this.http.post(`/api/andes/rup`, { concepts: reals, start, end, organizacion }).pipe(map(data => {
+            return this.http.post(`/andes/rup`, { concepts: reals, start, end, organizacion }).pipe(map(data => {
                 const res = {};
                 sctids.forEach(c => {
                     if (this.conceptBS[c]) {
@@ -92,7 +92,7 @@ export class SnomedAPI {
         const end = this.qf.end;
         const organizacion = this.qf.organizacion ? this.qf.organizacion.id : null;
 
-        return this.http.post(`/api/andes/rup/demografia`, { conceptId: sctid, rango: rangoEtario, start, end, organizacion });
+        return this.http.post(`/andes/rup/demografia`, { conceptId: sctid, rango: rangoEtario, start, end, organizacion });
     }
 
     cluster(sctid, semanticTags) {
@@ -100,7 +100,7 @@ export class SnomedAPI {
         const end = this.qf.end;
         const organizacion = this.qf.organizacion ? this.qf.organizacion.id : null;
 
-        return this.http.post(`/api/andes/rup/cluster`, { conceptId: sctid, semanticTags });
+        return this.http.post(`/andes/rup/cluster`, { conceptId: sctid, semanticTags });
     }
 
     maps(sctid) {
@@ -108,7 +108,7 @@ export class SnomedAPI {
         const end = this.qf.end;
         const organizacion = this.qf.organizacion ? this.qf.organizacion.id : null;
 
-        return this.http.post(`/api/andes/rup/maps`, { conceptId: sctid });
+        return this.http.post(`/andes/rup/maps`, { conceptId: sctid });
     }
 
     terms(sctid) {
@@ -116,14 +116,14 @@ export class SnomedAPI {
         const end = this.qf.end;
         const organizacion = this.qf.organizacion ? this.qf.organizacion.id : null;
 
-        return this.http.post(`/api/andes/rup/terms`, { conceptId: sctid, start, end, organizacion });
+        return this.http.post(`/andes/rup/terms`, { conceptId: sctid, start, end, organizacion });
     }
 
     organizaciones(search) {
-        return this.http.get('/api/andes/organizaciones', { params: { search } });
+        return this.http.get('/andes/organizaciones', { params: { search } });
     }
 
     semanticTags(search) {
-        return this.http.get('/api/andes/semanticTags', { params: { search } });
+        return this.http.get('/andes/semanticTags', { params: { search } });
     }
 }
