@@ -93,10 +93,10 @@
                                     </div>
                                     <ng-container *ngIf="(snomed.stats(concept.conceptId) | async) as stats">
                                         <div class="justify-content-end">
-                                            <span class="badge badge-primary badge-pill" *ngIf="stats.total == 0">
+                                            <span class="badge badge-primary badge-pill" *ngIf="stats.total > 0">
                                                 {{ stats.exact }}
                                             </span>
-                                            <span class="badge badge-warning badge-pill" *ngIf="stats.total == 0">
+                                            <span class="badge badge-warning badge-pill" *ngIf="stats.total > 0">
                                                 {{ stats.children }}
                                             </span>
                                         </div>
