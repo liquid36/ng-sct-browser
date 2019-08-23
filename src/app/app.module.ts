@@ -3,6 +3,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CdkTreeModule } from '@angular/cdk/tree';
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -75,7 +78,10 @@ import { AgmCoreModule } from '@agm/core';
     AppRoutingModule,
     NgbModule,
     AngularSplitModule,
+    BrowserAnimationsModule,
     CdkTreeModule,
+    MatTableModule,
+    MatSortModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyC__of8PZKirB_IvkjzI7XTlfYtLieGRh0&libraries=visualization'
     })

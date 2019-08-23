@@ -1,6 +1,50 @@
-<div class="row m-2" *ngIf="data && data.length">
+<div class="row m-2">
     <div class="col-12">
-        <table class="table table-striped table-responsive table-bordered">
+        <table mat-table [dataSource]="dataSource" matSort class="table table-striped table-bordered mat-elevation-z8">
+
+            <!--- Note that these columns can be defined in any order.
+                          The actual rendered columns are set as a property on the row definition" -->
+
+            <!-- Position Column -->
+            <ng-container matColumnDef="nombre">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+                <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+                <td mat-footer-cell *matFooterCellDef><b>Total</b></td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="count">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> #Registros </th>
+                <td mat-cell *matCellDef="let element"> {{element.count | number}} </td>
+                <td mat-footer-cell *matFooterCellDef> {{ calcTotal('count') | number }} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="exact">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> #Exactos </th>
+                <td mat-cell *matCellDef="let element"> {{ element.exact | number }} </td>
+                <td mat-footer-cell *matFooterCellDef> {{ calcTotal('exact') | number }} </td>
+            </ng-container>
+            <ng-container matColumnDef="primera">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Primera Vez </th>
+                <td mat-cell *matCellDef="let element"> {{ element.primera | number }} </td>
+                <td mat-footer-cell *matFooterCellDef> {{ calcTotal('primera') | number }} </td>
+            </ng-container>
+            <ng-container matColumnDef="pacientes">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> #Pacientes </th>
+                <td mat-cell *matCellDef="let element"> {{ element.pacientes | number }} </td>
+                <td mat-footer-cell *matFooterCellDef> {{ calcTotal('pacientes') | number }} </td>
+            </ng-container>
+            <ng-container matColumnDef="ratio">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Registros/Pacientes </th>
+                <td mat-cell *matCellDef="let element"> {{ element.ratio | number: '0.2' }} </td>
+                <td mat-footer-cell *matFooterCellDef> {{ calcTotal('count') / calcTotal('pacientes') | number: '0.2' }}
+                </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+        </table>
+        <!-- <table class="table table-striped table-responsive table-bordered">
             <thead>
                 <tr>
                     <td class="col-5">
@@ -31,12 +75,8 @@
                     <td *ngIf="hasPrimera"> {{ item.primera | number }} </td>
                     <td *ngIf="hasPaciente"> {{ item.pacientes | number }} </td>
                     <td *ngIf="hasPaciente"> {{ item.count / item.pacientes | number: '0.2' }} </td>
-                </tr>
-                <!-- <tr>
-                    <td>Total</td>
-                    <td>{{ dataTableTotal }}</td>
-                </tr> -->
+                </tr> 
             </tbody>
-        </table>
+        </table> -->
     </div>
 </div>

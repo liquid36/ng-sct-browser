@@ -54,4 +54,4 @@
 </div>
 
 <h5> Localidades </h5>
-<app-table-set [values]="localidades"></app-table-set>
+<app-table-set *ngIf="localidades" [values]="localidades"></app-table-set>
