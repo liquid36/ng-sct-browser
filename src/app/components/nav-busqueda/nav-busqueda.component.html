@@ -81,16 +81,17 @@
                     </div>
                 </form>
                 <div class="card card-default" *ngIf="matches">
-                    <table class="table table-bordered">
+                    <table class="table">
                         <tbody>
                             <tr *ngFor="let concept of matches">
                                 <td class="d-flex flex-row justify-content-between h-100 align-items-center" (click)="onSelect(concept)">
-                                    <div class="justify-content-start">
-                                        <span class="badge alert-warning">
-                                            {{ concept.definitionStatus === '900000000000073002' ? '≡' : '&nbsp;&nbsp;' }}
-                                        </span>
-                                        {{ concept.term }}
-                                    </div>
+                                    <section class="d-flex justify-content-start align-items-center w-75">
+                                        <span class="badge alert-warning mr-2">{{ concept.definitionStatus === '900000000000073002' ? '≡' : '&nbsp;&nbsp;' }}</span>
+                                        <div class="flex-column">
+                                            <h6 class="font-weight-bold">{{ concept.term }}</h6>
+                                            <p class="text-muted small-text result-item mr-4">{{ concept.fsn }}</p>
+                                        </div>
+                                    </section>
                                     <ng-container *ngIf="(snomed.stats(concept.conceptId) | async) as stats">
                                         <div class="justify-content-end">
                                             <span class="badge badge-primary badge-pill" *ngIf="stats.total > 0">
@@ -101,9 +102,6 @@
                                             </span>
                                         </div>
                                     </ng-container>
-                                </td>
-                                <td class="w-50 text-muted small-text result-item">
-                                    {{ concept.fsn }}
                                 </td>
                             </tr>
                         </tbody>
