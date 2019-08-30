@@ -27,10 +27,14 @@ export class ConceptParentComponent {
     public relatioships: any[];
     @Input() set concept(value) {
         this.conceptTemp = value;
+
+        const characteristicType = this.qf.BSrelationship.getValue() === 'stated' ?
+            ConceptParentComponent.STATED : ConceptParentComponent.INFERRED;
+
         if (this.conceptTemp.relationships) {
             this.relatioships = this.conceptTemp.relationships
                 .filter(e => e.active)
-                .filter(e => e.characteristicType.conceptId === ConceptParentComponent.STATED)
+                .filter(e => e.characteristicType.conceptId === characteristicType)
                 .filter(e => e.type.conceptId === ConceptParentComponent.ISA)
                 .map(e => { e.destination._level = 0; return e.destination; });
             this.getStats(this.relatioships);
