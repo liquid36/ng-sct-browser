@@ -1,0 +1,14 @@
+@import '../../scss/variables';
+
+.contenedor-filtros {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%; 
+}
+
+@media screen and (max-width: 980px) {
+    .contenedor-filtros {
+        flex-direction: column;
+    }
+}

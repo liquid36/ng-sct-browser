@@ -1,0 +1,13 @@
+<ul>
+    <ng-container *ngFor="let semantic of snomedService.semantics"> 
+      <li class="border {{ semantic.color }}">
+        <section class="contenedor-icono-texto">
+            <span class="icon icon-{{ semantic.icono }} border {{semantic.color}}"></span>
+            <div>
+              <h6>{{ semantic.nombre }}</h6>
+            </div>
+          </section>
+      </li>
+      </ng-container>
+  </ul>
+  <hr>

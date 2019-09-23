@@ -44,6 +44,19 @@ import { EstadisticasNavComponent } from './components/estadisticas-nav/estadist
 import { TableSetComponent } from './elements/table-set/table-set.component';
 
 import { AgmCoreModule } from '@agm/core';
+import { DemoComponent } from './demo/demo.component';
+import { NavbarComponent } from './demo/layout/navbar/navbar.component';
+import { SidebarComponent } from './demo/layout/sidebar/sidebar.component';
+import { MainComponent } from './demo/layout/main/main.component';
+import { FiltrosComponent } from './demo/componentes/filtros/filtros.component';
+import { SliderComponent } from './demo/componentes/slider/slider.component';
+import { ListadoComponent } from './demo/componentes/listado/listado.component';
+import { BuscadorComponent } from './demo/componentes/buscador/buscador.component';
+import { TablaComponent } from './demo/componentes/tabla/tabla.component';
+import { BotoneraComponent } from './demo/componentes/botonera/botonera.component';
+import { AsideComponent } from './demo/layout/aside/aside.component';
+import { HeaderComponent } from './demo/layout/main/header/header.component';
+import { DisplayComponent } from './demo/layout/main/display/display.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +81,20 @@ import { AgmCoreModule } from '@agm/core';
     TimeFilterFormComponent,
     HomeComponent,
     EstadisticasNavComponent,
-    TableSetComponent
+    TableSetComponent,
+    DemoComponent,
+    NavbarComponent,
+    SidebarComponent,
+    MainComponent,
+    FiltrosComponent,
+    SliderComponent,
+    ListadoComponent,
+    BuscadorComponent,
+    TablaComponent,
+    BotoneraComponent,
+    AsideComponent,
+    HeaderComponent,
+    DisplayComponent
   ],
   imports: [
     CommonModule,

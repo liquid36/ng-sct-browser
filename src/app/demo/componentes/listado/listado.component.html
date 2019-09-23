@@ -1,0 +1,18 @@
+<ul>
+  <ng-container *ngFor="let concepto of snomedService.conceptos"> 
+    <li>
+      <section class="contenedor-icono-texto">
+          <span class="icon icon-{{ concepto.semantic }} border {{concepto.color}}"></span>
+          <div>
+            <h4>{{ concepto.nombre }}</h4>
+            <small>{{ concepto.id }}</small>
+          </div>
+        </section>
+        <section class="contenedor-badge">
+          <span class="badge">{{ concepto.totales }}</span>
+          <span class="badge">{{ concepto.exactos }}</span>
+        </section>
+    </li>
+        <hr>
+    </ng-container>
+</ul>

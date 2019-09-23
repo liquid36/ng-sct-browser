@@ -1,0 +1,49 @@
+<section class="contenedor-filtros">
+    <div>
+        <input list="organizaciones" placeholder="Seleccione organizacion">
+        <datalist id="organizaciones">
+            <option>Hospital Provincial Neuquén "Dr. Eduardo Castro Rendón"</option>
+            <option>Hospital Zonal "Dr. Ramón Carrillo"</option>
+            <option>Hospital Bouquet Roldán</option>
+            <option>Hospital Dr. Horacio Heller</option>
+            <option>Hospital Villa La Angostura</option>
+        </datalist>
+    </div>
+    <div>  
+        <input list="profesionales" placeholder="Seleccione profesional">
+        <datalist id="profesionales">
+            <option>Matías Hernán Neira</option>
+            <option>Sebastián Lusetti</option>
+            <option>María Laura Monteverde</option>
+            <option>Nerina Lopez</option>
+            <option>Walter Molini</option>
+            <option>Ignacio Del Pin</option>
+            <option>Jhoanna Bastías</option>
+            <option>Adelaida Goldmann</option>
+        </datalist>
+    </div>
+    <div>     
+        <input list="prestaciones" placeholder="Seleccione prestaciones">
+        <datalist id="prestaciones">
+            <option>Consulta General de Medicina</option>
+            <option>Examen medico del adulto</option>
+            <option>Consulta odontologica</option>
+            <option>Consulta de colonoscopia</option>
+            <option>Consulta de traumatologia</option>
+            <option>Consulta de pediatria</option>
+            <option>Consulta de hemoterapia</option>
+            <option>Consulta de nutricion</option>
+        </datalist>
+    </div>
+
+    <div class="contenedor-datepicker">
+        <input type="date" name="desde">
+        <!-- <button class="icon icon-calendario" type="submit"></button> -->
+    </div>
+    <div class="contenedor-datepicker">
+        <input type="date" name="hasta">
+        <!-- <button class="icon icon-calendario" type="submit"></button> -->
+    </div>
+    <input type="range" id="a" name="a" value="50">
+    <button type="button" class="icon icon-camara-foto"></button>
+</section>

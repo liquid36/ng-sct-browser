@@ -10,7 +10,7 @@
       "prefix": "app",
       "schematics": {
         "@schematics/angular:component": {
-          "style": "sass"
+          "style": "scss"
         }
       },
       "architect": {
@@ -27,8 +27,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss",
-              "./node_modules/bootstrap/dist/css/bootstrap.min.css"
+              "src/app/demo/scss/main.scss"
             ],
             "scripts": [],
             "es5BrowserSupport": true
@@ -137,5 +136,10 @@
       }
     }
   },
-  "defaultProject": "andes-browser"
+  "defaultProject": "andes-browser",
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "scss"
+    }
+  }
 }

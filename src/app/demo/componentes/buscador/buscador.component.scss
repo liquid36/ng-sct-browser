@@ -1,0 +1,29 @@
+@import '../../scss/variables';
+
+.contenedor-buscador {
+    display: flex;
+    justify-content: space-around;
+    align-items: center; 
+    background-color: grey;
+    padding: $padding-contenedor;
+    
+    .input-buscador {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        width: 90%;
+
+
+        button {
+            color: white;
+            height: $height-inputs;
+            padding-right: 1rem;
+            transform-style: flat;
+            font-weight: 700;
+            text-transform: uppercase;
+            background-color: $andes-verde;
+            border: none;
+        }
+    }
+
+}

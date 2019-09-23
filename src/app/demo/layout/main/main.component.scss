@@ -1,0 +1,30 @@
+@import '../../scss/variables';
+
+.contenedor-principal {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: 60px auto 40px auto;
+    }
+
+    #main {
+        grid-column: 1 / 12;
+        grid-row: 2;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        
+        background-color: white;
+    }
+
+    
+    #aside {
+        grid-column: 12;
+        grid-row: 2 / -1;
+        
+        height: 100vh;
+        background-color: $andes-magenta;
+    }
+
+
+
+
