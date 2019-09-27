@@ -5,7 +5,15 @@
   
 </app-slider>
 <section>
-  <app-listado>
-    
-  </app-listado>
+
+<ng-container *ngIf="resultados === true; then mostrarResultados; else mostrarLeyenda"></ng-container>
+  <ng-template #mostrarResultados>
+    <app-listado  (click)="enviarSidebar()">
+
+    </app-listado>
+  </ng-template>
+  <ng-template #mostrarLeyenda>
+    <p>No se han encontrado resultados!</p>
+  </ng-template>
+  
 </section>

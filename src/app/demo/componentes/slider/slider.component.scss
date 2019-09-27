@@ -39,3 +39,12 @@ ul {
     
     }
 }
+
+// Responsive
+@media screen and (max-width: 768px) {    
+
+    ul {
+        width: 100vw;
+    }
+    
+}

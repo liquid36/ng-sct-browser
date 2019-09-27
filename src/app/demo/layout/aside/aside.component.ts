@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SnomedService } from '../../servicios/snomed.service';
 
 @Component({
   selector: 'app-aside',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AsideComponent implements OnInit {
 
-  constructor() { }
+  constructor(private snomedService: SnomedService) { }
 
   ngOnInit() {
   }

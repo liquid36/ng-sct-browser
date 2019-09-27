@@ -6,6 +6,12 @@
     grid-template-rows: 60px auto 40px auto;
     }
 
+    #header {
+        grid-column: 1 / -1;
+        grid-row: 1;
+        border-bottom: solid 1px black;
+        }
+
     #main {
         grid-column: 1 / 12;
         grid-row: 2;
@@ -14,15 +20,19 @@
         align-items: center;
         
         background-color: white;
+
+        app-display {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
     }
 
-    
     #aside {
         grid-column: 12;
         grid-row: 2 / -1;
         
         height: 100vh;
-        background-color: $andes-magenta;
     }
 
 

@@ -6,12 +6,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./demo.component.scss']
 })
 export class DemoComponent implements OnInit {
-  sidebar = true;
 
-  mostrarSidebar() {
-    this.sidebar = !this.sidebar;
+  sidebar = '';
+
+  recibirSidebar($event) {
+    this.sidebar = $event;
     console.log(this.sidebar)
-    }
+  }
 
   constructor() { }
 

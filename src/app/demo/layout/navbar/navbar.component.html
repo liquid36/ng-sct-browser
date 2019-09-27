@@ -1,18 +1,9 @@
-<section class="contenedor-navbar">
-  <div id="navbar-logo">
-    <span class="icon icon-andes"></span>
-  </div>
-  <div class="navbar-menu">
-      <ul>
-          <li>Inicio</li>
-          <li>Pacientes</li>
-          <li>Prestaciones</li>
-          <li>Profesionales</li>
-          <li>Organizaciones</li>
-          <li>Conceptos Asociados</li>
-      </ul>      
-  </div>
-  <div class="navbar-botonera">
-    <button>Modo comparativo</button>
-  </div>  
-</section>
+<header class="header">
+  <span class="navbar-logo icon icon-andes"></span>
+  <input class="menu-btn" type="checkbox" id="menu-btn" />
+  <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
+  <ul class="menu">
+    <li *ngFor="let menu of snomedService.menu"><a>{{ menu.item }}</a></li>
+    <button class="warning">Modo comparativo</button>
+  </ul>
+</header>

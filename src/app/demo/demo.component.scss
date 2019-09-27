@@ -1,0 +1,8 @@
+section.template-exploracion.full {
+    display: grid;
+    grid-template-areas:
+    "nv nv nv nv nv nv"
+    "fil fil fil fil fil fil"
+    "main main main main main main";
+    grid-template-rows: auto auto 1fr;
+}

@@ -1,14 +1,17 @@
-   <section id="template-exploracion">
-      <app-navbar>
-         
-      </app-navbar>
-      <app-filtros>
-         
-      </app-filtros>
-      <app-main>
-         
-      </app-main>
-      <app-sidebar>
+<section class="template-exploracion" [ngClass]="{'full': sidebar === true}" >
+   <app-navbar>
 
-      </app-sidebar>
-   </section> 
+   </app-navbar>
+   
+   <app-filtros>
+      
+   </app-filtros>
+
+   <router-outlet>
+
+   </router-outlet>
+   
+   <app-sidebar (enviar)="recibirSidebar($event)" >
+
+   </app-sidebar>
+</section> 

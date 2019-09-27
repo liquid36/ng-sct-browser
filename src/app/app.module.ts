@@ -57,6 +57,10 @@ import { BotoneraComponent } from './demo/componentes/botonera/botonera.componen
 import { AsideComponent } from './demo/layout/aside/aside.component';
 import { HeaderComponent } from './demo/layout/main/header/header.component';
 import { DisplayComponent } from './demo/layout/main/display/display.component';
+import { ConceptoPipe } from './demo/pipes/concepto.pipe';
+import { AcordionComponent } from './demo/componentes/acordion/acordion.component';
+import { MapaComponent } from './demo/componentes/mapa/mapa.component';
+import { GraficoComponent } from './demo/componentes/grafico/grafico.component';
 
 @NgModule({
   declarations: [
@@ -94,7 +98,11 @@ import { DisplayComponent } from './demo/layout/main/display/display.component';
     BotoneraComponent,
     AsideComponent,
     HeaderComponent,
-    DisplayComponent
+    DisplayComponent,
+    ConceptoPipe,
+    AcordionComponent,
+    MapaComponent,
+    GraficoComponent
   ],
   imports: [
     CommonModule,

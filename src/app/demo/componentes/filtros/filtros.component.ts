@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SnomedService } from '../../servicios/snomed.service';
 
 @Component({
   selector: 'app-filtros',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FiltrosComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private snomedService: SnomedService,
+  ) { }
 
   ngOnInit() {
   }

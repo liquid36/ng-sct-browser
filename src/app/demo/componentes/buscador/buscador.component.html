@@ -1,10 +1,12 @@
   <section class="contenedor-buscador">
     <div class="input-buscador">
       <input type="text">
-      <button>Buscar</button>
+      <button class="success" (click)="buscarConceptos()">Buscar</button>
     </div>
-    <button (click)="mostrarBusquedaAvanzada()">Avanzada</button>
+    <button class="info" (click)="mostrarBusquedaAvanzada()">Avanzada</button>
   </section>
+
+  <!-- Busqueda avanzada -->
   <section class="contenedor-buscador" *ngIf="busquedaAvanzada">
     <select name="" placeholder="Modo de busqueda" id="">
       <option value="">Termino exacto</option>
@@ -15,7 +17,4 @@
       <option value="">Activo</option>
       <option value="">Inactivo</option>
     </select>
-  </section>
-  <section>
-
   </section>

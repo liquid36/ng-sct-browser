@@ -1,4 +1,4 @@
-section#template-exploracion {
+section.template-exploracion {
     display: grid;
     grid-template-areas:
     "nv nv nv nv nv nv"
@@ -10,9 +10,6 @@ section#template-exploracion {
         grid-area: nv;
         display: flex;
         flex-direction: row;
-        
-        // Styling
-        background-color: darkcyan;
     }
     
     app-filtros {
@@ -32,6 +29,32 @@ section#template-exploracion {
         
         // Styling
         height: 100%;
+        background-color: white;
+    }
+}
 
+
+// Browser Responsive
+
+@media screen and (max-width: 780px) {
+    
+    section#template-exploracion {
+
+        app-main {
+            width: 100vw;
+            
+            // Styling
+            height: 100%;
+    
+        }
+
+        app-sidebar {
+            width: 100vw;
+            background-color: white;
+            
+            // Styling
+            height: 100%;
+    
+        }
     }
 }

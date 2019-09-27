@@ -1,3 +1,13 @@
-<p>
-  aside works!
-</p>
+  <!-- Tabs Laterales-->
+  <section class="wrapper">
+    <input type="checkbox" id="navigation" />
+    <nav>
+      <label routerLink="./arbol" for="navigation" class="icon icon-jerarquia"></label>
+      <label routerLink="./grafico" for="navigation" class="icon icon-grafico-torta"></label>
+      <label routerLink="./mapa" for="navigation" class="icon icon-estadistica"></label>
+    </nav>
+    <!-- Contenido Tab-->
+    <div>
+      <router-outlet></router-outlet>
+    </div>
+  </section>

@@ -1,6 +1,5 @@
 <ul>
-  <ng-container *ngFor="let concepto of snomedService.conceptos"> 
-    <li>
+    <li *ngFor="let concepto of conceptos$ | async" [routerLink]="[concepto.id]">
       <section class="contenedor-icono-texto">
           <span class="icon icon-{{ concepto.semantic }} border {{concepto.color}}"></span>
           <div>
@@ -13,6 +12,4 @@
           <span class="badge">{{ concepto.exactos }}</span>
         </section>
     </li>
-        <hr>
-    </ng-container>
-</ul>
+  </ul>

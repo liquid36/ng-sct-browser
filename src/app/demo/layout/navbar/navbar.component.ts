@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SnomedService } from '../../servicios/snomed.service';
 
 @Component({
   selector: 'app-navbar',
@@ -6,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
-  constructor() { }
+  constructor(private snomedService: SnomedService) { }
 
   ngOnInit() {
   }

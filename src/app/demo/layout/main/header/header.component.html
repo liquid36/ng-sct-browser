@@ -1,13 +1,13 @@
 <!-- app-header -->
-<header>
+<header *ngIf="conceptos$ | async as concepto">
   <div class="contenedor-icono-texto">
       <span class="icon icon-hallazgo border hallazgos"></span>
       <div>
-          <h4>Fiebre</h4>
-          <small>STCID: 00012312310412</small>
+          <h4>{{ concepto.nombre }}</h4>
+          <small>STCID: {{ concepto.id }}</small>
       </div>
   </div>
   <div class="contenedor-badge">
-      <span class="badge">HALLAZGO</span>
+      <span class="badge">{{ concepto.semantic }}</span>
   </div>
 </header>

@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Concepto } from '../../servicios/concepto';
+import { Observable, of } from 'rxjs';
+import { CONCEPTOS } from '../../servicios/mock-conceptos';
+
 
 @Component({
   selector: 'app-buscador',
@@ -11,6 +15,10 @@ export class BuscadorComponent implements OnInit {
 
   mostrarBusquedaAvanzada() {
     this.busquedaAvanzada = !this.busquedaAvanzada;
+  }
+
+  buscarConceptos():Observable<Concepto[]> {
+    return of (CONCEPTOS);
   }
 
   constructor() { }
