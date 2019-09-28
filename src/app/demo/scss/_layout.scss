@@ -1,19 +1,19 @@
 section.template-exploracion {
     display: grid;
-    grid-template-areas:
-    "nv nv nv nv nv nv"
-    "side fil fil fil fil fil"
-    "side main main main main main";
-    grid-template-rows: auto auto 1fr;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: auto 50px 1fr;
 
     app-navbar {
-        grid-area: nv;
+        grid-column: 1 / -1;
+        grid-row: 1;
         display: flex;
         flex-direction: row;
     }
     
     app-filtros {
-        grid-area: fil;
+        grid-column: 2 / -1;
+        grid-row: 2;
+        //Styling 
         background-color: lightgrey;
         padding: $padding-contenedor;
         display: flex;
@@ -21,40 +21,75 @@ section.template-exploracion {
     }
     
     app-main {
-        grid-area: main;
+        grid-column: 2 / -1;
+        grid-row: 3;
     }
     
     app-sidebar {
-        grid-area: side;
-        
+        grid-column: 1 / 2;
+        grid-row: 2;        
         // Styling
         height: 100%;
         background-color: white;
     }
 }
 
-
 // Browser Responsive
-
-@media screen and (max-width: 780px) {
+@media screen and (max-width: 768px) {
     
-    section#template-exploracion {
-
-        app-main {
-            width: 100vw;
-            
-            // Styling
-            height: 100%;
-    
+    section.template-exploracion {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        grid-template-rows: auto auto 1fr;
+        
+        app-navbar {
+            grid-column: 1 / -1;
+            grid-row: 1;
+            display: flex;
+            flex-direction: row;
         }
 
-        app-sidebar {
-            width: 100vw;
+        app-filtros {
+            grid-column: 1 / -1;
+            grid-row: 2;
+        }
+        
+        app-main {
+            grid-column: 1 / -1;
+            grid-row: 3;
             background-color: white;
+            z-index: 1;
             
-            // Styling
-            height: 100%;
-    
+        }
+        
+        app-sidebar {
+            grid-column: 1 / -1;
+            grid-row: 2;
+            background-color: white;
+            z-index: 2;
         }
     }
-}
+    }
+
+
+    section.template-exploracion.full {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+    
+        app-filtros {
+            grid-column: 1 / -1;
+            grid-row: 2;
+        }
+        
+        app-main {
+            grid-column: 1 / -1;
+            grid-row: 3;
+            background-color: white;
+            z-index: 1;
+        }
+        
+        app-sidebar {
+            transform: translate(-100%);
+            transition: transform 50ms ease-in;
+        }
+    }

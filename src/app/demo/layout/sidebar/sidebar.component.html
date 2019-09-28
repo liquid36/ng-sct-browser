@@ -8,7 +8,8 @@
 
 <ng-container *ngIf="resultados === true; then mostrarResultados; else mostrarLeyenda"></ng-container>
   <ng-template #mostrarResultados>
-    <app-listado  (click)="enviarSidebar()">
+    <button class="fab icon icon-flecha-izquierda" (click)="enviarSidebar()">Vuelve Sidebar</button>
+    <app-listado (click)="enviarSidebar()">
 
     </app-listado>
   </ng-template>
