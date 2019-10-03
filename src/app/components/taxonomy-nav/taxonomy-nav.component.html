@@ -8,24 +8,30 @@
     </div>
     <div class="card-body">
         <ul *ngIf="relatioships.length > 0">
-            <li *ngFor="let relacion of relatioships; let i = index;" [ngStyle]="{'padding-left': relacion._level * 15 + 'px'  }">
+            <li *ngFor="let relacion of relatioships; let i = index;"
+                [ngStyle]="{'padding-left': relacion._level * 15 + 'px'  }">
                 <button class="btn btn-link" (click)="getChildren(relacion, i)">
                     <i class="mdi mdi-chevron-right" *ngIf="!relacion._expanded && !relacion.isLeafStated"></i>
                     <i class="mdi mdi-chevron-down" *ngIf="relacion._expanded && !relacion.isLeafStated"></i>
                     <i class="mdi mdi-minus" *ngIf="relacion.isLeafStated"></i>
                 </button>
-                
+
                 <span class="badge alert-warning" style="padding: 3px 7px;border-radius: 10px;">
                     {{ relacion.definitionStatus.conceptId === '900000000000073002' ? '≡' : '&nbsp;&nbsp;' }}
                 </span>
-                
+
                 <span style="cursor: pointer;" (dblclick)="onSelect(relacion)">
                     {{ relacion.preferredTerm }}
                 </span>
-    
-                <span class="badge badge-primary badge-pill" *ngIf="relacion._stats && relacion._stats.total">
-                    {{ relacion._stats.exact }} | {{ relacion._stats.children }}
-                </span>
+
+                <ng-container *ngIf="(snomed.stats(relacion.conceptId) | async) as stats">
+                    <span class="badge badge-primary badge-pill" *ngIf="stats.total > 0">
+                        {{ stats.exact | number }}
+                    </span>
+                    <span class="badge badge-warning badge-pill" *ngIf="stats.total > 0">
+                        {{ stats.children | number }}
+                    </span>
+                </ng-container>
             </li>
         </ul>
     </div>

@@ -62,10 +62,7 @@ export class ConceptDescTableComponent {
     @Input() set concept(value) {
         this.conceptTemp = value;
         this.snomed.terms(this.conceptTemp.conceptId).subscribe(stats => {
-            this.termCount = {};
-            stats.forEach((item) => {
-                this.termCount[item._id] = item.count;
-            });
+            this.termCount = stats;
         });
 
     }

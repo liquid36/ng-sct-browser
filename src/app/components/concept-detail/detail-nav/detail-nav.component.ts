@@ -1,24 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { SnomedAPI } from '../../../services/snomed.service';
 import { ConceptDetailService } from '../concept-detail.service';
 
 @Component({
     selector: 'app-detail-nav',
     templateUrl: './detail-nav.component.html'
 })
-export class DetailNavComponent implements OnInit {
+export class DetailNavComponent {
     public concept = null;
     public refSetLanguage = {
         conceptId: '231000013101',
         preferredTerm: 'conjunto de referencias de lenguaje para la extensión provincial de Neuquén (foundation metadata concept)'
     };
-    constructor(private snomed: SnomedAPI, private conceptDetailService: ConceptDetailService) { }
+    public conceptSelect$;
 
-
-    ngOnInit() {
-        this.conceptDetailService.conceptSelected$.subscribe(concept => {
-            this.concept = concept;
-        });
+    constructor(private conceptDetailService: ConceptDetailService) {
+        this.conceptSelect$ = this.conceptDetailService.conceptSelected$;
     }
 
 }

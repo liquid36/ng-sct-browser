@@ -1,5 +1,7 @@
-<div class="card-body">
-    <app-concept-parent [concept]="conceptSelected" *ngIf="conceptSelected"></app-concept-parent>
-    <app-concept-name [concept]="conceptSelected" *ngIf="conceptSelected"></app-concept-name>
-    <app-concept-children [concept]="conceptSelected" *ngIf="conceptSelected"></app-concept-children>
-</div>
+<ng-container *ngIf="(conceptSelect$ | async) as concept">
+    <div class="card-body">
+        <app-concept-parent [concept]="concept"></app-concept-parent>
+        <app-concept-name [concept]="concept"></app-concept-name>
+        <app-concept-children [concept]="concept"></app-concept-children>
+    </div>
+</ng-container>

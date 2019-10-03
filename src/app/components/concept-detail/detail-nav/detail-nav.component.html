@@ -1,24 +1,27 @@
-<div class="row m-2">
-    <div class="col-12">
-        <h5>
-            <span class="badge alert-warning" style="padding: 3px 7px;border-radius: 10px;">
-                {{ concept.definitionStatus.conceptId === '900000000000073002' ? '≡' : '&nbsp;&nbsp;' }}
+<ng-container *ngIf="(conceptSelect$ | async) as concept">
+    <div class="row m-2">
+        <div class="col-12">
+            <h5>
+                <span class="badge alert-warning" style="padding: 3px 7px;border-radius: 10px;">
+                    {{ concept.definitionStatus.conceptId === '900000000000073002' ? '≡' : '&nbsp;&nbsp;' }}
+                </span>
+                &nbsp;&nbsp;
+                {{ concept.fullySpecifiedName }}
+            </h5>
+        </div>
+    </div>
+    <div class="row ml-2">
+        <div class="col-12">
+            SCTID: {{ concept.conceptId }},
+            {{  concept.definitionStatus.conceptId === '900000000000073002' ? 'Suficientemente definido' : 'Primitivo'  }}
+            {{ concept.active ? 'Activo' : 'Inactivo' }}.
+            <br />
+            <span *ngIf="concept.inferredDescendants > 0 || concept.statedDescendants > 0">
+                Descendants count, Stated: {{ concept.statedDescendants }} concepts, Inferred:
+                {{ concept.inferredDescendants }} concepts.
             </span>
-            &nbsp;&nbsp;
-            {{ concept.fullySpecifiedName }} 
-        </h5>
+        </div>
     </div>
-</div>
-<div class="row ml-2">
-    <div class="col-12">
-        SCTID: {{ concept.conceptId }}, 
-        {{  concept.definitionStatus.conceptId === '900000000000073002' ? 'Suficientemente definido' : 'Primitivo'  }}
-        {{ concept.active ? 'Activo' : 'Inactivo' }}. 
-        <br/>
-        <span *ngIf="concept.inferredDescendants > 0 || concept.statedDescendants > 0">
-            Descendants count, Stated: {{ concept.statedDescendants }} concepts, Inferred: {{ concept.inferredDescendants }} concepts.
-        </span>
-    </div>
-</div>
-<app-concept-desc-table [concept]="concept" [refSetLanguage]="refSetLanguage"></app-concept-desc-table>
-<app-concept-rel-table [concept]="concept" ></app-concept-rel-table>
+    <app-concept-desc-table [concept]="concept" [refSetLanguage]="refSetLanguage"></app-concept-desc-table>
+    <app-concept-rel-table [concept]="concept"></app-concept-rel-table>
+</ng-container>

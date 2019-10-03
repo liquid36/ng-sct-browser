@@ -11,7 +11,7 @@
             <div class="col-4">
                 <div ngbDropdown class="">
                     <button ngbDropdownToggle class="btn btn-success btn-block dropdown-toggle" type="button">
-                        Modo de Busqueda
+                        Modo de Busqueda {{ searchMode$ | async }}
                     </button>
                     <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <button ngbDropdownItem (click)="setSearchMode('fullText')">
@@ -73,9 +73,8 @@
                             <strong>Ingrese al menos 3 caracteres</strong>
                         </label>
                         <div class="btn-group w-100">
-                            <input name="textSearch" type="search" class="form-control w-100" placeholder="Search..."
-                                   autocomplete="off" [(ngModel)]="textSearch"
-                                   (input)="onInputChange($event.target.value)">
+                            <input #input name="textSearch" type="search" class="form-control w-100"
+                                   placeholder="Search..." autocomplete="off" [(ngModel)]="textSearch">
                             <span class="searchclear glyphicon glyphicon-remove-circle"></span>
                         </div>
                     </div>
@@ -83,8 +82,9 @@
                 <div class="card card-default" *ngIf="matches">
                     <table class="table table-bordered">
                         <tbody>
-                            <tr *ngFor="let concept of matches">
-                                <td class="d-flex flex-row justify-content-between h-100 align-items-center" (click)="onSelect(concept)">
+                            <tr *ngFor="let concept of (nb.searchResult$ | async)">
+                                <td class="d-flex flex-row justify-content-between h-100 align-items-center"
+                                    (click)="onSelect(concept)">
                                     <div class="justify-content-start">
                                         <span class="badge alert-warning">
                                             {{ concept.definitionStatus === '900000000000073002' ? '≡' : '&nbsp;&nbsp;' }}

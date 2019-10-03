@@ -3,9 +3,9 @@ import { SnomedAPI } from '../../services/snomed.service';
 import { ConceptDetailService } from '../../components/concept-detail/concept-detail.service';
 
 @Component({
-  selector: 'app-taxonomy-nav',
-  templateUrl: './taxonomy-nav.component.html',
-  styleUrls: ['./taxonomy-nav.component.scss']
+    selector: 'app-taxonomy-nav',
+    templateUrl: './taxonomy-nav.component.html',
+    styleUrls: ['./taxonomy-nav.component.scss']
 })
 export class TaxonomyNavComponent implements OnInit {
     public static ISA = '116680003';
@@ -13,23 +13,23 @@ export class TaxonomyNavComponent implements OnInit {
     public static STATED = '900000000000010007';
 
     public ROOTConcept = {
-        isLeafInferred : false,
-        isLeafStated : false,
-        semtag : 'SNOMED RT+CTV3',
-        conceptId : '138875005',
-        preferredTerm : 'concepto de SNOMED CT (SNOMED RT+CTV3)',
-        fullySpecifiedName : 'concepto de SNOMED CT (SNOMED RT+CTV3)',
-        definitionStatus : {
-            conceptId : '900000000000074008',
-            preferredTerm : 'estado de definición de concepto necesario pero no suficiente (metadato del núcleo)'
+        isLeafInferred: false,
+        isLeafStated: false,
+        semtag: 'SNOMED RT+CTV3',
+        conceptId: '138875005',
+        preferredTerm: 'concepto de SNOMED CT (SNOMED RT+CTV3)',
+        fullySpecifiedName: 'concepto de SNOMED CT (SNOMED RT+CTV3)',
+        definitionStatus: {
+            conceptId: '900000000000074008',
+            preferredTerm: 'estado de definición de concepto necesario pero no suficiente (metadato del núcleo)'
         },
-        statedDescendants : 337272,
-        inferredDescendants : 336894,
-        active : true,
-        effectiveTime : '20020131',
-        module : {
-            conceptId : '900000000000207008',
-            preferredTerm : 'módulo identificador del núcleo de la terminología de SNOMED CT (metadato del núcleo)'
+        statedDescendants: 337272,
+        inferredDescendants: 336894,
+        active: true,
+        effectiveTime: '20020131',
+        module: {
+            conceptId: '900000000000207008',
+            preferredTerm: 'módulo identificador del núcleo de la terminología de SNOMED CT (metadato del núcleo)'
         },
         _level: 0
     };
@@ -37,7 +37,7 @@ export class TaxonomyNavComponent implements OnInit {
     constructor(
         private snomed: SnomedAPI,
         private conceptDetailService: ConceptDetailService
-    ) {}
+    ) { }
 
     private conceptTemp;
     public relatioships: any[] = [];
@@ -46,18 +46,8 @@ export class TaxonomyNavComponent implements OnInit {
         this.relatioships = [this.ROOTConcept];
     }
 
-    getStats(conceptos) {
-        const scts = conceptos.map(e => e.conceptId);
-        this.snomed.history(scts).subscribe((stats) => {
-            conceptos.forEach(c => {
-                c._stats = stats[c.conceptId];
-            });
-            this.relatioships = [...this.relatioships];
-        });
-    }
-
     onSelect(concept) {
-        this.conceptDetailService.select(concept);
+        this.conceptDetailService.select(concept.conceptId);
     }
 
     getChildren(relationship, index) {
@@ -70,12 +60,11 @@ export class TaxonomyNavComponent implements OnInit {
                     ...children,
                     ...this.relatioships.slice(index + 1)
                 ];
-                this.getStats(children);
             });
         } else {
             relationship._expanded = false;
             const myLevel = relationship._level;
-            for (let i = index + 1 ; i < this.relatioships.length; i++) {
+            for (let i = index + 1; i < this.relatioships.length; i++) {
                 if (this.relatioships[i]._level > myLevel) {
                     this.relatioships.splice(i, 1);
                     i--;

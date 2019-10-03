@@ -18,17 +18,11 @@ export class ConceptNameComponent implements OnChanges, OnInit {
     public stats;
 
     ngOnInit() {
-        this.qf.start$.subscribe(() => {
-            this.snomed.history([this.concept.conceptId]).subscribe(data => {
-                // this.stats = data[this.concept.conceptId];
-            });
-        });
+
     }
 
     ngOnChanges() {
-        this.snomed.history([this.concept.conceptId]).subscribe(data => {
-            // this.stats = data[this.concept.conceptId];
-        });
+
     }
 
 }

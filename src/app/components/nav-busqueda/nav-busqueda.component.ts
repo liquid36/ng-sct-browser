@@ -1,100 +1,86 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { SnomedAPI } from '../../services/snomed.service';
 import { ConceptDetailService } from '../concept-detail/concept-detail.service';
 import { Unsubscribe } from '../../decorators/Unsubscribe';
 import { NavBusquedaService } from './nav-busqueda.service';
-
-enum SearchMode {
-    fullText,
-    partialMatching,
-    regex
-}
-
-enum StausFilter {
-    activeOnly,
-    inactiveOnly,
-    activeAndInactive
-}
+import { fromEvent, merge, BehaviorSubject } from 'rxjs';
+import { map, distinctUntilChanged, debounceTime, switchMap, tap, filter, delay } from 'rxjs/operators';
+import { asObject } from '../../operators';
 
 @Component({
     selector: 'app-nav-busqueda',
     templateUrl: './nav-busqueda.component.html'
 })
-export class NavBusquedaComponent implements OnInit {
+export class NavBusquedaComponent implements OnInit, AfterViewInit {
     public matches;
     public filters;
-
-
     public textSearch = '';
-    public lastSearch = '';
-    private searchMode = 'partialMatching';
-    private statusFilter = 'activeOnly';
+
+    public searchMode = new BehaviorSubject('partialMatching');
+    public searchMode$ = this.searchMode.asObservable();
+
+    public statusFilter = new BehaviorSubject('activeOnly');
+    public statusFilter$ = this.statusFilter.asObservable();
+
     public semanticFilter = '';
 
+    public inputChange$;
+
     constructor(
+        private elementRef: ElementRef,
         private snomed: SnomedAPI,
         private conceptDetailService: ConceptDetailService,
-        private nb: NavBusquedaService
-    ) { }
+        public nb: NavBusquedaService
+    ) {
+        this.inputChange$ = fromEvent<Event>(this.elementRef.nativeElement, 'input').pipe(
+            map($event => ($event.target as HTMLInputElement).value),
+            debounceTime(400),
+            distinctUntilChanged(),
+        );
+    }
 
     ngOnInit() {
-        this.nb.searchInput$.subscribe(text => {
-            this.textSearch = text;
-            this.onInputChange(text || '');
+
+        merge(
+            this.statusFilter$.pipe(asObject('status', (t) => t), delay(1)),
+            this.searchMode$.pipe(asObject('mode', (t) => t), delay(1)),
+            merge(
+                this.inputChange$,
+                this.nb.searchInput$.pipe(
+                    tap(t => this.textSearch = t)
+                )
+            ).pipe(
+                asObject('search', (t) => t),
+            )
+        ).pipe(
+            tap(() => {
+                this.matches = [];
+                this.filters = {};
+            })
+        ).subscribe((v) => {
+            this.nb.searchFilters.next(v);
         });
+
+    }
+
+
+    ngAfterViewInit() {
+
     }
 
     onSelect(concept) {
-        this.conceptDetailService.select(concept);
-    }
-
-    @Unsubscribe()
-    search() {
-        const params: any = {
-            query: this.textSearch,
-            limit: 20,
-            searchMode: this.searchMode,
-            lang: 'english',
-            statusFilter: this.statusFilter,
-            skipTo: 0,
-            returnLimit: 50,
-            normalize: true
-        };
-        if (this.semanticFilter.length > 0) {
-            params.semanticFilter = this.semanticFilter;
-        }
-
-        return this.snomed.descriptions(params).subscribe((result) => {
-            this.matches = result.matches;
-            this.filters = result.filters;
-            this.snomed.history(this.matches.map(c => c.conceptId)).subscribe(() => { });
-        });
-    }
-
-    onInputChange(query: string) {
-        if (this.lastSearch !== query) {
-            if (query.length > 2) {
-                this.lastSearch = query;
-                this.nb.search = query;
-                this.search();
-            } else {
-                this.matches = null;
-            }
-        }
+        this.conceptDetailService.select(concept.conceptId);
     }
 
     setSearchMode(mode) {
-        this.searchMode = mode;
-        this.search();
+        this.searchMode.next(mode);
     }
 
     setStatusFilter(mode) {
-        this.statusFilter = mode;
-        this.search();
+        this.statusFilter.next(mode);
     }
 
     setSemTag(semTag) {
         this.semanticFilter = semTag;
-        this.search();
     }
 }

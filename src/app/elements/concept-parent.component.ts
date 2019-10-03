@@ -18,9 +18,7 @@ export class ConceptParentComponent {
         private conceptDetailService: ConceptDetailService,
         private qf: QueryFilterService
     ) {
-        this.qf.onChange$.subscribe(() => {
-            this.snomed.history(this.relatioships.map(c => c.conceptId)).subscribe(() => { });
-        });
+
     }
 
     private conceptTemp;
@@ -37,25 +35,16 @@ export class ConceptParentComponent {
                 .filter(e => e.characteristicType.conceptId === characteristicType)
                 .filter(e => e.type.conceptId === ConceptParentComponent.ISA)
                 .map(e => { e.destination._level = 0; return e.destination; });
-            this.getStats(this.relatioships);
         } else {
             this.relatioships = [];
         }
     }
 
     onSelect(concept) {
-        this.conceptDetailService.select(concept);
+        this.conceptDetailService.select(concept.conceptId);
     }
 
-    getStats(conceptos) {
-        const scts = conceptos.map(e => e.conceptId);
-        this.snomed.history(scts).subscribe((stats) => {
-            conceptos.forEach(c => {
-                c._stats = stats[c.conceptId];
-            });
-            this.relatioships = [...this.relatioships];
-        });
-    }
+
 
     getParents(relationship, index) {
         if (!relationship._expanded && relationship.conceptId !== '138875005') {
@@ -67,7 +56,6 @@ export class ConceptParentComponent {
                     ...parents,
                     ...this.relatioships.slice(index)
                 ];
-                this.getStats(parents);
             });
         } else {
             relationship._expanded = false;

@@ -3,34 +3,35 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { SnomedAPI } from '../../services/snomed.service';
 import { Router } from '@angular/router';
-import { QueryFilterService } from '../../services/queryfilter.service';
+import { distinctUntilChanged, switchMap, filter, tap } from 'rxjs/operators';
+import { cache } from '../../operators';
 
 @Injectable()
 export class ConceptDetailService {
-    private conceptSel;
     private conceptSelected = new BehaviorSubject<any>(null);
-    conceptSelected$ = this.conceptSelected.asObservable();
+    conceptSelected$;
 
     constructor(
         private snomed: SnomedAPI,
-        private router: Router,
-        private qf: QueryFilterService
+        private router: Router
     ) {
-        this.qf.onChange$.subscribe(() => {
-            this.snomed.history([this.conceptSel.conceptId]).subscribe(() => { });
-        });
+        this.conceptSelected$ = this.conceptSelected.asObservable().pipe(
+            distinctUntilChanged(),
+            tap((sctid) => {
+                this.router.navigate([], {
+                    queryParams: { conceptId: sctid }, queryParamsHandling: 'merge'
+                });
+            }),
+            filter(value => !!value),
+            switchMap((sctid) => {
+                return this.snomed.concept(sctid);
+            }),
+            cache()
+        );
     }
 
     select(concept) {
-        if (concept) {
-            this.snomed.concept(concept.conceptId).subscribe((snomed) => {
-                this.conceptSel = snomed;
-                this.conceptSelected.next(snomed);
-            });
-            this.router.navigate([], {
-                queryParams: { conceptId: concept.conceptId }, queryParamsHandling: 'merge'
-            });
-        }
+        this.conceptSelected.next(concept);
     }
 
 }

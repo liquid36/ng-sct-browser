@@ -1,7 +1,7 @@
 
 import { Injectable } from '@angular/core';
 import { Server } from './server.service';
-import { map } from 'rxjs/operators';
+import { map, tap, bufferTime, filter, switchMap } from 'rxjs/operators';
 import { of, BehaviorSubject } from 'rxjs';
 import { QueryFilterService } from './queryfilter.service';
 import { environment } from '../../environments/environment';
@@ -11,16 +11,28 @@ export class SnomedAPI {
         this.http.setBaseURL(environment.API_URL);
 
         this.qf.onChange$.subscribe(() => {
-            Object.keys(this.conceptBS).forEach(key => {
-                this.conceptBS[key].next({ total: 0, children: 0, exact: 0 });
-            });
+            this.conceptBS = {};
         });
+
+        this.fromStats$.pipe(
+            filter(concepts => concepts),
+            bufferTime(250),
+            filter(concepts => concepts.length > 0),
+            switchMap(concepts => {
+                return this.history(concepts);
+            })
+        ).subscribe(() => { });
+
     }
     private database = 'es-edition';
     private version = 'v20190722';
     private path = '/snomed';
     private cache = {};
     private conceptBS = {};
+
+
+    public fromStats = new BehaviorSubject(null);
+    public fromStats$ = this.fromStats.asObservable();
 
     descriptions(params) {
         return this.http.get(`${this.path}/${this.database}/${this.version}/descriptions`, { params });
@@ -51,18 +63,31 @@ export class SnomedAPI {
     stats(id) {
         if (!this.conceptBS[id]) {
             this.conceptBS[id] = new BehaviorSubject({ total: 0, exact: 0, children: 0 });
+            this.fromStats.next(id);
         }
         return this.conceptBS[id];
     }
 
     history(sctids: string[]) {
-        const reals = sctids.filter(c => !this.cache[c]);
         const start = this.qf.start;
         const end = this.qf.end;
         const organizacion = this.qf.organizacion ? this.qf.organizacion.id : null;
+        const form = this.qf.relationship;
+
+        const reals = sctids.filter(c => !this.cache[c]);
+        const body = {
+            visualization: 'count',
+            target: reals,
+            type: form,
+            filter: {
+                start,
+                end,
+                organizacion
+            }
+        };
 
         if (reals.length > 0) {
-            return this.http.post(`/andes/rup`, { concepts: reals, start, end, organizacion }).pipe(map(data => {
+            return this.http.post(`/andes/analytics/count`, body).pipe(map(data => {
                 const res = {};
                 sctids.forEach(c => {
                     if (this.conceptBS[c]) {
@@ -116,7 +141,19 @@ export class SnomedAPI {
         const end = this.qf.end;
         const organizacion = this.qf.organizacion ? this.qf.organizacion.id : null;
 
-        return this.http.post(`/andes/rup/terms`, { conceptId: sctid, start, end, organizacion });
+        const body = {
+            visualization: 'term',
+            target: sctid,
+            filter: {
+                start,
+                end,
+                organizacion
+            }
+        };
+
+        return this.http.post(`/andes/analytics/term`, body).pipe(
+            map(res => res[sctid])
+        );
     }
 
     organizaciones(search) {

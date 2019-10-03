@@ -18,9 +18,6 @@ export class ConceptChildrenComponent {
         private conceptDetailService: ConceptDetailService,
         private qf: QueryFilterService
     ) {
-        this.qf.onChange$.subscribe(() => {
-            this.snomed.history(this.relatioships.map(c => c.conceptId)).subscribe(() => { });
-        });
     }
 
     private conceptTemp;
@@ -30,22 +27,11 @@ export class ConceptChildrenComponent {
         this.snomed.children(value.conceptId).subscribe(children => {
             children.forEach(e => e._level = 0);
             this.relatioships = children;
-            this.getStats(this.relatioships);
-        });
-    }
-
-    getStats(conceptos) {
-        const scts = conceptos.map(e => e.conceptId);
-        this.snomed.history(scts).subscribe((stats) => {
-            // conceptos.forEach(c => {
-            //     c._stats = stats[c.conceptId];
-            // });
-            // this.relatioships = [...this.relatioships];
         });
     }
 
     onSelect(concept) {
-        this.conceptDetailService.select(concept);
+        this.conceptDetailService.select(concept.conceptId);
     }
 
     getChildren(relationship, index) {
@@ -58,7 +44,6 @@ export class ConceptChildrenComponent {
                     ...children,
                     ...this.relatioships.slice(index + 1)
                 ];
-                this.getStats(children);
             });
         } else {
             relationship._expanded = false;
