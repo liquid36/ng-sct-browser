@@ -1,0 +1,67 @@
+@import '../../scss/variables';
+
+.btn {
+    text-transform: uppercase;
+    color: white;
+    font-weight: 600;
+    width: fit-content;
+    box-shadow: none;
+    border: none;
+    padding: 0 0.5rem;
+    height: 30px;
+
+
+    // Variantes de tamaño
+	&.sm {
+        font-size: 0.75rem;
+	}
+    
+	&.md {
+        font-size: 1rem;
+	}
+    
+	&.lg {
+        font-size: 1.25rem;
+        height: 40px;
+	}
+
+    // Variantes formales
+	&.rounded {
+		border-radius: 50px;
+	}
+
+	&.rounded-right {
+		border-top-right-radius: 50px;
+		border-bottom-right-radius: 50px;
+	}
+
+	&.rounded-left {
+		border-top-left-radius: 50px;
+		border-bottom-left-radius: 50px;
+	}
+
+	// Variantes cromaticas
+	&.magenta {
+		background-color: $andes-magenta;
+	}
+
+	&.azul {
+		background-color: $andes-azul;
+	}
+
+	&.azul-oscuro {
+		background-color: $andes-azul-oscuro;
+	}
+
+	&.violeta {
+		background-color: $andes-violeta;
+	}
+
+	&.celeste {
+		background-color: $andes-celeste;
+	}
+
+	&.verde {
+		background-color: $andes-verde;
+	}
+}

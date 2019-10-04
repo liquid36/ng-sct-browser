@@ -4,6 +4,6 @@
   <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
   <ul class="menu">
     <li *ngFor="let menu of snomedService.menu"><a>{{ menu.item }}</a></li>
-    <button class="warning">Modo comparativo</button>
+    <button class="warning" routerLink="./ui">Modo comparativo</button>
   </ul>
 </header>

@@ -53,13 +53,9 @@ section.template-exploracion {
             grid-column: 1 / -1;
             grid-row: 2;
         }
-        
+
         app-main {
             grid-column: 1 / -1;
-            grid-row: 3;
-            background-color: white;
-            z-index: 1;
-            
         }
         
         app-sidebar {
@@ -71,17 +67,16 @@ section.template-exploracion {
     }
     }
 
-
     section.template-exploracion.full {
-        display: grid;
-        grid-template-columns: repeat(6, 1fr);
-    
+        grid-template-rows: auto 50px 1fr;
+
         app-filtros {
             grid-column: 1 / -1;
             grid-row: 2;
         }
         
         app-main {
+            display: block;
             grid-column: 1 / -1;
             grid-row: 3;
             background-color: white;

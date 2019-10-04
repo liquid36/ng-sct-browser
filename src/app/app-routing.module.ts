@@ -5,24 +5,26 @@ import { MainComponent } from './demo/layout/main/main.component';
 import { TablaComponent } from './demo/componentes/tabla/tabla.component';
 import { GraficoComponent } from './demo/componentes/grafico/grafico.component';
 import { MapaComponent } from './demo/componentes/mapa/mapa.component';
+import { UiComponent } from './demo/componentes/ui/ui.component';
 
 
 const routes: Routes = [
   // { path: 'home', component: HomeComponent },
   // { path: '', redirectTo: '/home', pathMatch: 'full' },
   // { path: '**', redirectTo: '/home', pathMatch: 'full' }
-
+  
   { path: 'demo', component: DemoComponent,
+  children: [
+    { path:'ui' , component: UiComponent },
+    { path: ':id' , component: MainComponent, 
     children: [
-      { path: ':id' , component: MainComponent, 
-        children: [
-          { path:'arbol' , component: TablaComponent },
-          { path:'grafico' , component: GraficoComponent },
-          { path:'mapa' , component: MapaComponent },
-        ]
-      }
+      { path:'arbol' , component: TablaComponent },
+      { path:'grafico' , component: GraficoComponent },
+      { path:'mapa' , component: MapaComponent },
     ]
-  },
+  }
+]
+},
   { path: '', redirectTo: '/demo', pathMatch: 'full' },
   { path: '**', redirectTo: '/demo', pathMatch: 'full' },
 

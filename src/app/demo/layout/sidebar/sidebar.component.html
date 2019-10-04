@@ -1,3 +1,4 @@
+<!-- <button class="fab icon icon-flecha-izquierda" (click)="enviarSidebar()"></button> -->
 <app-buscador>
   
 </app-buscador>
@@ -6,15 +7,14 @@
 </app-slider>
 <section>
 
-<ng-container *ngIf="resultados === true; then mostrarResultados; else mostrarLeyenda"></ng-container>
-  <ng-template #mostrarResultados>
-    <button class="fab icon icon-flecha-izquierda" (click)="enviarSidebar()">Vuelve Sidebar</button>
-    <app-listado (click)="enviarSidebar()">
+  <ng-container *ngIf="resultados === true; then mostrarResultados; else mostrarLeyenda"></ng-container>
+    <ng-template #mostrarResultados>
+      <app-listado (click)="enviarSidebar()">
 
-    </app-listado>
-  </ng-template>
-  <ng-template #mostrarLeyenda>
-    <p>No se han encontrado resultados!</p>
-  </ng-template>
-  
+      </app-listado>
+    </ng-template>
+    <ng-template #mostrarLeyenda>
+      <p>No se han encontrado resultados!</p>
+    </ng-template>
+    
 </section>

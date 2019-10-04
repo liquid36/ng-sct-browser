@@ -4,11 +4,25 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    width: 100%; 
+    align-items: center;
+    width: 100%;
+
+    button.desktopHidden {
+        display: none;
+    }
+    
 }
 
 @media screen and (max-width: 768px) {
     .contenedor-filtros {
         flex-direction: column;
+        
+        input.universal {
+            display: block;
+        }
+
+        div > * {
+            display: none;
+        }
     }
 }

@@ -1,11 +1,14 @@
 @import '../../scss/variables';
 
 button.fab {
+    width: 30px;
+    height: 30px;
     position: absolute;
-    left: 0px;
-    top: 50%;
+    right: -20px;
+    top: 10%;
     background-color: $andes-azul;
     font-size: 1rem;
     color: white;
-    border-radius: 50%;
+    box-shadow: none;
+    border: none;
 }

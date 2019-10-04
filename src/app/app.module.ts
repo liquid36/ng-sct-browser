@@ -61,6 +61,9 @@ import { ConceptoPipe } from './demo/pipes/concepto.pipe';
 import { AcordionComponent } from './demo/componentes/acordion/acordion.component';
 import { MapaComponent } from './demo/componentes/mapa/mapa.component';
 import { GraficoComponent } from './demo/componentes/grafico/grafico.component';
+import { UiComponent } from './demo/componentes/ui/ui.component';
+import { BotonComponent } from './demo/componentes/boton/boton.component';
+import { IconoComponent } from './demo/componentes/icono/icono.component';
 
 @NgModule({
   declarations: [
@@ -102,7 +105,10 @@ import { GraficoComponent } from './demo/componentes/grafico/grafico.component';
     ConceptoPipe,
     AcordionComponent,
     MapaComponent,
-    GraficoComponent
+    GraficoComponent,
+    UiComponent,
+    BotonComponent,
+    IconoComponent
   ],
   imports: [
     CommonModule,
